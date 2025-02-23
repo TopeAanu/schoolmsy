@@ -1,61 +1,71 @@
 // app/api/auth/[...nextauth]/route.js
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { connectToDB } from "../../../../lib/db";  // Update this path
-import { verify } from "bcryptjs";
+import { connectToDB } from "@/app/lib/db";
+import { compare } from "bcryptjs";
 
 export const authOptions = {
   providers: [
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        try {
-          const db = await connectToDB();
-          const usersCollection = db.collection("users");
-          
-          const user = await usersCollection.findOne({
-            username: credentials.username,
-          });
-          
-          if (!user) {
-            throw new Error("No user found with this username");
-          }
-          
-          const isValid = await verify(credentials.password, user.password);
-          
-          if (!isValid) {
-            throw new Error("Invalid password");
-          }
-          
-          return { 
-            id: user._id.toString(), 
-            name: user.username, 
-            role: user.role 
-          };
-        } catch (error) {
-          console.error('Authorization error:', error);
-          throw error;
+        if (!credentials?.username || !credentials?.password) {
+          throw new Error("Please enter username and password");
         }
+
+        const db = await connectToDB();
+        const user = await db.collection("users").findOne({
+          username: credentials.username,
+        });
+
+        if (!user) {
+          throw new Error("No user found");
+        }
+
+        const isPasswordValid = await compare(
+          credentials.password,
+          user.password
+        );
+
+        if (!isPasswordValid) {
+          throw new Error("Invalid password");
+        }
+
+        return {
+          id: user._id.toString(),
+          name: user.username,
+          role: user.role,
+        };
       },
     }),
   ],
+  session: {
+    strategy: "jwt",
+  },
+  pages: {
+    signIn: "/auth/signin",
+    error: "/auth/error",
+  },
   callbacks: {
-    async session({ session, token }) {
-      session.user.role = token.role;
-      return session;
-    },
     async jwt({ token, user }) {
       if (user) {
         token.role = user.role;
       }
       return token;
     },
+    async session({ session, token }) {
+      if (token) {
+        session.user.role = token.role;
+      }
+      return session;
+    },
   },
-  secret: process.env.NEXTAUTH_SECRET,
 };
 
-export default NextAuth(authOptions);
+export const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
