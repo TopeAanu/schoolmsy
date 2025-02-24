@@ -12,6 +12,8 @@ const AdminDashboard = () => {
     grade: "",
     subjects: "",
     image: "",
+    adminUsername: "",
+    adminPassword: ""
   });
 
   const [credentials, setCredentials] = useState(null);
@@ -23,32 +25,33 @@ const AdminDashboard = () => {
     setCredentials(null);
 
     try {
-      const response = await fetch("/api/admin/signup", {
+      const response = await fetch("/api/admin/students", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          adminUsername: process.env.NEXT_PUBLIC_ADMIN_USERNAME,
-          adminPassword: process.env.NEXT_PUBLIC_ADMIN_PASSWORD,
-        }),
+        body: JSON.stringify(formData)
       });
 
       const data = await response.json();
-
+      
       if (!response.ok) {
-        throw new Error(data.message);
+        throw new Error(data.message || "Failed to create student account");
       }
 
       setCredentials(data.credentials);
-      setFormData({
+      
+      // Clear form but keep admin credentials for convenience
+      setFormData(prev => ({
         studentName: "",
         age: "",
         grade: "",
         subjects: "",
         image: "",
-      });
+        adminUsername: prev.adminUsername,
+        adminPassword: prev.adminPassword
+      }));
+
     } catch (err) {
       setError(err.message);
     }
@@ -62,62 +65,96 @@ const AdminDashboard = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block mb-2">Student Name</label>
-              <Input
-                required
-                value={formData.studentName}
-                onChange={(e) =>
-                  setFormData({ ...formData, studentName: e.target.value })
-                }
-              />
+            {/* Admin credentials section */}
+            <div className="bg-gray-50 p-4 rounded-lg mb-6">
+              <h3 className="font-semibold mb-4">Admin Authentication</h3>
+              <div className="space-y-4">
+                <div>
+                  <label className="block mb-2">Admin Username</label>
+                  <Input
+                    required
+                    type="text"
+                    value={formData.adminUsername}
+                    onChange={(e) =>
+                      setFormData({ ...formData, adminUsername: e.target.value })
+                    }
+                  />
+                </div>
+                <div>
+                  <label className="block mb-2">Admin Password</label>
+                  <Input
+                    required
+                    type="password"
+                    value={formData.adminPassword}
+                    onChange={(e) =>
+                      setFormData({ ...formData, adminPassword: e.target.value })
+                    }
+                  />
+                </div>
+              </div>
             </div>
 
-            <div>
-              <label className="block mb-2">Age</label>
-              <Input
-                type="number"
-                required
-                value={formData.age}
-                onChange={(e) =>
-                  setFormData({ ...formData, age: e.target.value })
-                }
-              />
-            </div>
+            {/* Student information section */}
+            <div className="space-y-4">
+              <div>
+                <label className="block mb-2">Student Name</label>
+                <Input
+                  required
+                  value={formData.studentName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, studentName: e.target.value })
+                  }
+                />
+              </div>
 
-            <div>
-              <label className="block mb-2">Grade</label>
-              <Input
-                required
-                value={formData.grade}
-                onChange={(e) =>
-                  setFormData({ ...formData, grade: e.target.value })
-                }
-              />
-            </div>
+              <div>
+                <label className="block mb-2">Age</label>
+                <Input
+                  type="number"
+                  min="5"
+                  max="18"
+                  required
+                  value={formData.age}
+                  onChange={(e) =>
+                    setFormData({ ...formData, age: e.target.value })
+                  }
+                />
+              </div>
 
-            <div>
-              <label className="block mb-2">Subjects (comma-separated)</label>
-              <Input
-                required
-                value={formData.subjects}
-                onChange={(e) =>
-                  setFormData({ ...formData, subjects: e.target.value })
-                }
-                placeholder="Math, Science, English"
-              />
-            </div>
+              <div>
+                <label className="block mb-2">Grade</label>
+                <Input
+                  required
+                  value={formData.grade}
+                  onChange={(e) =>
+                    setFormData({ ...formData, grade: e.target.value })
+                  }
+                />
+              </div>
 
-            <div>
-              <label className="block mb-2">Image URL</label>
-              <Input
-                type="url"
-                value={formData.image}
-                onChange={(e) =>
-                  setFormData({ ...formData, image: e.target.value })
-                }
-                placeholder="https://example.com/student-image.jpg"
-              />
+              <div>
+                <label className="block mb-2">Subjects (comma-separated)</label>
+                <Input
+                  required
+                  value={formData.subjects}
+                  onChange={(e) =>
+                    setFormData({ ...formData, subjects: e.target.value })
+                  }
+                  placeholder="Math, Science, English"
+                />
+              </div>
+
+              <div>
+                <label className="block mb-2">Image URL</label>
+                <Input
+                  type="url"
+                  value={formData.image}
+                  onChange={(e) =>
+                    setFormData({ ...formData, image: e.target.value })
+                  }
+                  placeholder="https://example.com/student-image.jpg"
+                />
+              </div>
             </div>
 
             <Button type="submit" className="w-full">
