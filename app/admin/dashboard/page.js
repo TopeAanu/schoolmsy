@@ -13,7 +13,7 @@ const AdminDashboard = () => {
     subjects: "",
     image: "",
     adminUsername: "",
-    adminPassword: ""
+    adminPassword: "",
   });
 
   const [credentials, setCredentials] = useState(null);
@@ -30,28 +30,27 @@ const AdminDashboard = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
 
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.message || "Failed to create student account");
       }
 
       setCredentials(data.credentials);
-      
+
       // Clear form but keep admin credentials for convenience
-      setFormData(prev => ({
+      setFormData((prev) => ({
         studentName: "",
         age: "",
         grade: "",
         subjects: "",
         image: "",
         adminUsername: prev.adminUsername,
-        adminPassword: prev.adminPassword
+        adminPassword: prev.adminPassword,
       }));
-
     } catch (err) {
       setError(err.message);
     }
@@ -76,7 +75,10 @@ const AdminDashboard = () => {
                     type="text"
                     value={formData.adminUsername}
                     onChange={(e) =>
-                      setFormData({ ...formData, adminUsername: e.target.value })
+                      setFormData({
+                        ...formData,
+                        adminUsername: e.target.value,
+                      })
                     }
                   />
                 </div>
@@ -87,7 +89,10 @@ const AdminDashboard = () => {
                     type="password"
                     value={formData.adminPassword}
                     onChange={(e) =>
-                      setFormData({ ...formData, adminPassword: e.target.value })
+                      setFormData({
+                        ...formData,
+                        adminPassword: e.target.value,
+                      })
                     }
                   />
                 </div>
