@@ -11,5 +11,44 @@
       "Science"
     ],
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1280px-Stadtbild_M%C3%BCnchen.jpg"
+  },
+  {
+    "username": "peterf",
+    "password": "LMdQBPPU",
+    "name": "Peter Fasasi",
+    "age": 11,
+    "grade": "6",
+    "subjects": [
+      "Math",
+      "English",
+      "Science"
+    ],
+    "image": "https://imgur.com/vqX6lzd"
+  },
+  {
+    "username": "topef",
+    "password": "cc6zaNxP",
+    "name": "Tope Fasasi",
+    "age": 7,
+    "grade": "4",
+    "subjects": [
+      "Math",
+      "English",
+      "Science"
+    ],
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1280px-Stadtbild_M%C3%BCnchen.jpg"
+  },
+  {
+    "username": "christianaf",
+    "password": "OIKTOoLv",
+    "name": "Christiana Fasasi",
+    "age": 9,
+    "grade": "5",
+    "subjects": [
+      "Math",
+      "English",
+      "Science"
+    ],
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Stadtbild_M%C3%BCnchen.jpg/1280px-Stadtbild_M%C3%BCnchen.jpg"
   }
 ]

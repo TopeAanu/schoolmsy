@@ -1,145 +1,66 @@
-// File path: /app/api/admin/students/route.js (for App Router)
-// OR: /pages/api/admin/students.js (for Pages Router)
+import { hash } from "bcryptjs";
+import { connectToDB } from "@/lib/db";
 
-import fs from "fs";
-import path from "path";
-
-// Path to our "database" file
-const DB_PATH = path.join(process.cwd(), "data", "students.json");
-
-// Ensure the directory exists
-const ensureDbExists = () => {
-  const dir = path.dirname(DB_PATH);
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true });
-  }
-  if (!fs.existsSync(DB_PATH)) {
-    fs.writeFileSync(DB_PATH, JSON.stringify([]));
-  }
-};
-
-// Read all students
-const getStudents = () => {
-  ensureDbExists();
+export async function POST(req) {
   try {
-    const data = fs.readFileSync(DB_PATH, "utf8");
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Error reading student data:", error);
-    return [];
-  }
-};
-
-// Save all students
-const saveStudents = (students) => {
-  ensureDbExists();
-  fs.writeFileSync(DB_PATH, JSON.stringify(students, null, 2));
-};
-
-export async function POST(request) {
-  try {
-    // Parse the request body
-    const body = await request.json();
-
-    // Extract data from the request
     const {
+      adminUsername,
+      adminPassword,
       studentName,
       age,
       grade,
       subjects,
       image,
-      adminUsername,
-      adminPassword,
-    } = body;
+    } = await req.json();
 
-    // Validate admin credentials (replace with your actual auth logic)
-    if (adminUsername !== "tope" || adminPassword !== "12345") {
-      return new Response(
-        JSON.stringify({ message: "Invalid admin credentials" }),
-        { status: 401, headers: { "Content-Type": "application/json" } }
-      );
+    // Verify admin credentials
+    if (
+      adminUsername !== process.env.ADMIN_USERNAME ||
+      adminPassword !== process.env.ADMIN_PASSWORD
+    ) {
+      return new Response(JSON.stringify({ message: "Unauthorized" }), {
+        status: 401,
+      });
     }
 
-    // Validate required student fields
-    if (!studentName || !age || !grade || !subjects) {
-      return new Response(
-        JSON.stringify({ message: "Missing required student information" }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
-      );
-    }
+    // Connect to student database
+    const db = await connectToDB("student");
+    const studentsCollection = db.collection("student-profile");
 
-    // Generate a username (simple example: lowercase first name + first letter of last name)
-    const nameParts = studentName.trim().split(" ");
-    const firstName = nameParts[0].toLowerCase();
-    const lastInitial =
-      nameParts.length > 1
-        ? nameParts[nameParts.length - 1][0].toLowerCase()
-        : "";
-    const username = `${firstName}${lastInitial}`;
+    // Generate credentials
+    const username = studentName.toLowerCase().replace(/\s+/g, "");
+    const tempPassword = Math.random().toString(36).slice(-8);
+    const hashedPassword = await hash(tempPassword, 12);
 
-    // Generate a temporary password
-    const tempPassword = generateTemporaryPassword();
-
-    // Create credentials object
-    const credentials = {
+    // Create student document
+    await studentsCollection.insertOne({
       username,
-      password: tempPassword,
-    };
-
-    // Get existing students
-    const students = getStudents();
-
-    // Check if username already exists
-    if (students.some((s) => s.username === credentials.username)) {
-      // Add a number to make the username unique
-      const userCount = students.filter((s) =>
-        s.username.startsWith(credentials.username)
-      ).length;
-
-      credentials.username = `${credentials.username}${userCount + 1}`;
-    }
-
-    // Create the new student object
-    const newStudent = {
-      username: credentials.username,
-      password: credentials.password,
+      password: hashedPassword,
       name: studentName,
       age: parseInt(age),
-      grade: grade,
+      grade,
       subjects: subjects.split(",").map((s) => s.trim()),
-      image: image || null,
-    };
+      image,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
-    // Add to "database"
-    students.push(newStudent);
-    saveStudents(students);
-
-    // Return the created credentials
     return new Response(
       JSON.stringify({
-        message: "Student account created successfully",
-        credentials,
+        credentials: {
+          username,
+          password: tempPassword,
+        },
       }),
-      { status: 201, headers: { "Content-Type": "application/json" } }
+      { status: 201 }
     );
   } catch (error) {
-    console.error("Error creating student account:", error);
+    console.error("Admin student creation error:", error);
     return new Response(
       JSON.stringify({
-        message: error.message || "Failed to create student account",
+        message: error.message || "Internal server error",
       }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+      { status: 500 }
     );
   }
-}
-
-// Helper function to generate a random temporary password
-function generateTemporaryPassword() {
-  const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let password = "";
-  for (let i = 0; i < 8; i++) {
-    password += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return password;
 }
