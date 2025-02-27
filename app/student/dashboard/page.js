@@ -1,13 +1,12 @@
 // app/student/dashboard/page.js
 "use client";
 import React from "react";
-// import { Card } from "../../components/ui/card";
-import { Alert, AlertDescription } from "../../components/ui/alert";
-import { useStudentAuth } from "../../components/hooks/useStudentAuth";
-import { LogoutButton } from "../../components/student-dashboard/LogoutButton";
-import { StudentProfileCard } from "../../components/student-dashboard/StudentProfileCard";
-import { StudentSubjectsCard } from "../../components/student-dashboard/StudentSubjectCard";
-import { StudentAssignmentsCard } from "../../components/student-dashboard/StudentAssignmentCard";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useStudentAuth } from "@/components/hooks/useStudentAuth";
+import { LogoutButton } from "@/components/student-dashboard/LogoutButton";
+import { StudentProfileCard } from "@/components/student-dashboard/StudentProfileCard";
+import { StudentSubjectsCard } from "@/components/student-dashboard/StudentSubjectCard";
+import { StudentAssignmentsCard } from "@/components/student-dashboard/StudentAssignmentCard";
 
 const StudentDashboard = () => {
   const { studentData, loading, error } = useStudentAuth();
@@ -35,7 +34,7 @@ const StudentDashboard = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <StudentProfileCard studentData={studentData} />
           <StudentSubjectsCard subjects={studentData.subjects} />
-          <StudentAssignmentsCard />
+          <StudentAssignmentsCard username={studentData.username} />
         </div>
       ) : (
         <div className="text-center">

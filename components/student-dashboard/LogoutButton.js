@@ -1,3 +1,5 @@
+"use client";
+
 // components/LogoutButton.js
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";

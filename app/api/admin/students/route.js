@@ -1,3 +1,4 @@
+// /api/admin/students/route.js
 import { hash } from "bcryptjs";
 import { connectToDB } from "@/lib/db";
 
@@ -32,7 +33,7 @@ export async function POST(req) {
     const tempPassword = Math.random().toString(36).slice(-8);
     const hashedPassword = await hash(tempPassword, 12);
 
-    // Create student document
+    // Create student document with new fields for assignments and grades
     await studentsCollection.insertOne({
       username,
       password: hashedPassword,
@@ -41,6 +42,9 @@ export async function POST(req) {
       grade,
       subjects: subjects.split(",").map((s) => s.trim()),
       image,
+      assignmentsCount: 0,
+      completedAssignments: 0,
+      averageGrade: null,
       createdAt: new Date(),
       updatedAt: new Date(),
     });

@@ -19,17 +19,23 @@ export const useStudentAuth = () => {
 
     const fetchStudentData = async () => {
       try {
-        const response = await fetch(
+        // Fetch profile
+        const profileResponse = await fetch(
           `/api/student/profile?username=${encodeURIComponent(username)}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        if (!response.ok) {
-          if (response.status === 401) {
+        // Fetch assignments
+        const assignmentsResponse = await fetch(
+          `/api/student/assignments?username=${encodeURIComponent(username)}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        if (!profileResponse.ok || !assignmentsResponse.ok) {
+          if (
+            profileResponse.status === 401 ||
+            assignmentsResponse.status === 401
+          ) {
             localStorage.removeItem("studentAuth");
             router.push("/student/login");
             return;
@@ -37,8 +43,13 @@ export const useStudentAuth = () => {
           throw new Error("Failed to fetch student data");
         }
 
-        const data = await response.json();
-        setStudentData(data);
+        const profileData = await profileResponse.json();
+        const assignmentsData = await assignmentsResponse.json();
+
+        setStudentData({
+          ...profileData,
+          assignments: assignmentsData,
+        });
       } catch (err) {
         setError(err.message);
       } finally {
