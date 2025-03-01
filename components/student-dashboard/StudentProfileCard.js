@@ -61,7 +61,7 @@ export const StudentProfileCard = ({ studentData }) => {
             </div>
 
             {/* Progress bar */}
-            {studentData.assignmentsCount > 0 && (
+            {/* {studentData.assignmentsCount > 0 && (
               <div className="mt-2">
                 <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                   <div
@@ -84,7 +84,7 @@ export const StudentProfileCard = ({ studentData }) => {
                   % complete
                 </div>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </CardContent>
