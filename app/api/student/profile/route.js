@@ -1,5 +1,5 @@
 // /api/student/profile/route.js
-import { connectToDB } from "@/lib/db";
+import { connectToDB } from "@/app/lib/db";
 
 export async function GET(req) {
   try {

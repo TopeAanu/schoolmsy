@@ -1,5 +1,5 @@
 import { compare } from "bcryptjs";
-import { connectToDB } from "@/lib/db";
+import { connectToDB } from "@/app/lib/db";
 
 export async function POST(req) {
   try {

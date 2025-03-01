@@ -1,4 +1,4 @@
-import { connectToDB } from "@/lib/db";
+import { connectToDB } from "@/app/lib/db";
 
 export async function GET(req) {
   let db = null;

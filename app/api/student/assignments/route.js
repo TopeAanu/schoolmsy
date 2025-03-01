@@ -1,19 +1,9 @@
-import { connectToDB } from "@/lib/db";
+import { connectToDB } from "@/app/lib/db";
 
 export async function GET(req) {
-  let db = null;
   try {
     const { searchParams } = new URL(req.url);
     const username = searchParams.get("username");
-    const token = req.headers.get("Authorization")?.split(" ")[1];
-
-    // Validate token
-    const authData = localStorage.getItem("studentAuth");
-    if (!authData || !token || JSON.parse(authData).token !== token) {
-      return new Response(JSON.stringify({ message: "Unauthorized" }), {
-        status: 401,
-      });
-    }
 
     if (!username) {
       return new Response(JSON.stringify({ message: "Username is required" }), {
@@ -21,7 +11,8 @@ export async function GET(req) {
       });
     }
 
-    db = await connectToDB("student");
+    // Connect to the assignments database directly
+    const db = await connectToDB("assignments");
     const assignmentsCollection = db.collection("assignments");
 
     const assignments = await assignmentsCollection
@@ -39,13 +30,5 @@ export async function GET(req) {
       }),
       { status: 500 }
     );
-  } finally {
-    if (db?.client) {
-      try {
-        await db.client.close();
-      } catch (err) {
-        console.error("Error closing database connection:", err);
-      }
-    }
   }
 }

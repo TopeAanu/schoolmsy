@@ -1,6 +1,7 @@
 // components/student-dashboard/StudentProfileCard.jsx
+"use client";
 import React from "react";
-import { Card, CardHeader, CardContent } from "../../components/ui/card";
+import { Card, CardHeader, CardContent } from "../ui/card";
 
 export const StudentProfileCard = ({ studentData }) => {
   return (

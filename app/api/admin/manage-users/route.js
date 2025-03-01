@@ -1,5 +1,5 @@
 // app/api/admin/manage-users/route.js
-import { connectToDB } from '@/lib/db';  // Update this path
+import { connectToDB } from '@/app/lib/db';  // Update this path
 
 export async function POST(req) {
   try {
