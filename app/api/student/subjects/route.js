@@ -108,14 +108,5 @@ export async function GET(req) {
         status: 500,
       }
     );
-  } finally {
-    // Ensure the DB connection is closed
-    if (db && db.client) {
-      try {
-        await db.client.close();
-      } catch (err) {
-        console.error("Error closing database connection:", err);
-      }
-    }
   }
 }

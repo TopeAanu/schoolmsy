@@ -32,10 +32,21 @@ export const useStudentAuth = () => {
           { headers: { Authorization: `Bearer ${token}` } }
         );
 
-        if (!profileResponse.ok || !assignmentsResponse.ok) {
+        // Fetch subjects with stats (this is the missing API call)
+        const subjectsResponse = await fetch(
+          `/api/student/subjects?username=${encodeURIComponent(username)}`,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+
+        if (
+          !profileResponse.ok || 
+          !assignmentsResponse.ok || 
+          !subjectsResponse.ok
+        ) {
           if (
             profileResponse.status === 401 ||
-            assignmentsResponse.status === 401
+            assignmentsResponse.status === 401 ||
+            subjectsResponse.status === 401
           ) {
             localStorage.removeItem("studentAuth");
             router.push("/student/login");
@@ -46,10 +57,12 @@ export const useStudentAuth = () => {
 
         const profileData = await profileResponse.json();
         const assignmentsData = await assignmentsResponse.json();
+        const subjectsData = await subjectsResponse.json();
 
         setStudentData({
           ...profileData,
           assignments: assignmentsData,
+          subjects: subjectsData, // Add the subjects data to studentData
         });
       } catch (err) {
         setError(err.message);
