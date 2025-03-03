@@ -24,29 +24,50 @@ export async function GET(req) {
       });
     }
 
-    // If the student doesn't have subjects, return an empty array
-    if (!student.subjects || !Array.isArray(student.subjects)) {
-      return new Response(JSON.stringify([]), { status: 200 });
-    }
-
     // Get assignment and grade collections
     const assignmentsCollection = db.collection("assignments");
     const gradesCollection = db.collection("grades");
 
+    // Get all unique subjects from assignments collection for this user
+    const assignmentSubjects = await assignmentsCollection.distinct("subject", { username });
+
+    // Build a complete list of subjects from both profile and assignments
+    let allSubjects = new Set();
+    
+    // Add subjects from student profile if they exist
+    if (student.subjects && Array.isArray(student.subjects)) {
+      student.subjects.forEach(subject => {
+        const subjectName = typeof subject === 'string' ? subject : subject.name;
+        if (subjectName) {
+          allSubjects.add(subjectName);
+        }
+      });
+    }
+    
+    // Add subjects from assignments
+    assignmentSubjects.forEach(subject => {
+      if (subject) {
+        allSubjects.add(subject);
+      }
+    });
+
+    // Convert to array and remove any undefined/null values
+    const uniqueSubjects = Array.from(allSubjects).filter(Boolean);
+
     // Enhance each subject with assignment count and current grade
     const subjectsWithStats = await Promise.all(
-      student.subjects.map(async (subject) => {
+      uniqueSubjects.map(async (subjectName) => {
         // Count assignments for this subject
         const subjectAssignments = await assignmentsCollection.countDocuments({
           username,
-          subject: subject.name || subject,
+          subject: subjectName,
         });
 
         // Get grades for this subject
         const subjectGrades = await gradesCollection
           .find({
             username,
-            subject: subject.name || subject,
+            subject: subjectName,
           })
           .toArray();
 
@@ -85,13 +106,27 @@ export async function GET(req) {
           }
         }
 
+        // Find the original subject object if it exists in student.subjects
+        let subjectMetadata = { name: subjectName };
+        
+        if (student.subjects && Array.isArray(student.subjects)) {
+          const originalSubject = student.subjects.find(s => 
+            (typeof s === 'string' && s === subjectName) || 
+            (typeof s === 'object' && s.name === subjectName)
+          );
+          
+          if (originalSubject && typeof originalSubject === 'object') {
+            subjectMetadata = originalSubject;
+          }
+        }
+
         // Return the subject with stats
         return {
-          name: subject.name || subject,
+          name: subjectName,
           assignments: subjectAssignments,
           currentGrade,
           // Include any other subject properties from the DB
-          ...(typeof subject === "object" ? subject : { name: subject }),
+          ...(typeof subjectMetadata === 'object' ? subjectMetadata : {}),
         };
       })
     );
