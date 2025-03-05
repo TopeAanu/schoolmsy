@@ -17,7 +17,7 @@ export const authOptions = {
           throw new Error("Please enter username and password");
         }
 
-        const db = await connectToDB();
+        const db = await connectToDB("admin");
         const user = await db.collection("users").findOne({
           username: credentials.username,
         });
