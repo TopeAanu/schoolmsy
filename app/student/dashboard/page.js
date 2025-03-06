@@ -25,16 +25,22 @@ const StudentDashboard = () => {
         <h1 className="text-3xl font-bold">Student Dashboard</h1>
         <LogoutButton />
       </div>
-
+  
       {error ? (
         <Alert className="bg-red-50">
           <AlertDescription className="text-red-600">{error}</AlertDescription>
         </Alert>
       ) : studentData ? (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <StudentProfileCard studentData={studentData} />
-          <StudentSubjectsCard subjects={studentData.subjects} />
-          <StudentAssignmentsCard username={studentData.username} />
+        <div className="flex flex-col space-y-6">
+          <div className="w-full">
+            <StudentProfileCard studentData={studentData} />
+          </div>
+          <div className="w-full">
+            <StudentSubjectsCard subjects={studentData.subjects} />
+          </div>
+          <div className="w-full">
+            <StudentAssignmentsCard username={studentData.username} />
+          </div>
         </div>
       ) : (
         <div className="text-center">

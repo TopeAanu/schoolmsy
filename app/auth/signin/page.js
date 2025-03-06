@@ -28,15 +28,12 @@
 //   );
 // }
 
-
-
-
-
 // app/auth/signin/page.js
 "use client";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Navbar from "@/components/navbar/Navbar";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -75,50 +72,68 @@ export default function SignIn() {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4">
-      <Card>
-        <CardHeader>
-          <h1 className="text-2xl font-bold">Admin Sign In</h1>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="block mb-2">Username</label>
-              <Input
-                required
-                value={credentials.username}
-                onChange={(e) =>
-                  setCredentials({ ...credentials, username: e.target.value })
-                }
-              />
-            </div>
+    <div>
+      <Navbar />
 
-            <div>
-              <label className="block mb-2">Password</label>
-              <Input
-                type="password"
-                required
-                value={credentials.password}
-                onChange={(e) =>
-                  setCredentials({ ...credentials, password: e.target.value })
-                }
-              />
-            </div>
+      <div
+        className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
+        style={{
+          backgroundImage:
+            "url('/schoolchildren-with-blackboard-background.jpg')",
+        }}
+      >
+        <div className="max-w-md w-full">
+          <Card className="bg-white bg-opacity-90 shadow-xl">
+            <CardHeader>
+              <h1 className="text-2xl font-bold">Admin Sign In</h1>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block mb-2">Username</label>
+                  <Input
+                    required
+                    value={credentials.username}
+                    onChange={(e) =>
+                      setCredentials({
+                        ...credentials,
+                        username: e.target.value,
+                      })
+                    }
+                  />
+                </div>
 
-            <Button type="submit" className="w-full">
-              Sign In
-            </Button>
-          </form>
+                <div>
+                  <label className="block mb-2">Password</label>
+                  <Input
+                    type="password"
+                    required
+                    value={credentials.password}
+                    onChange={(e) =>
+                      setCredentials({
+                        ...credentials,
+                        password: e.target.value,
+                      })
+                    }
+                  />
+                </div>
 
-          {error && (
-            <Alert className="mt-4 bg-red-50">
-              <AlertDescription className="text-red-600">
-                {error}
-              </AlertDescription>
-            </Alert>
-          )}
-        </CardContent>
-      </Card>
+                <Button type="submit" className="w-full">
+                  Sign In
+                </Button>
+              </form>
+
+              {error && (
+                <Alert className="mt-4 bg-red-50">
+                  <AlertDescription className="text-red-600">
+                    {error}
+                  </AlertDescription>
+                </Alert>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 }

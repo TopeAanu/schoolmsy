@@ -67,9 +67,7 @@ export const StudentAssignmentsCard = ({ username }) => {
   if (loading) {
     return (
       <Card>
-        <CardHeader>
-          <h3 className="font-bold">Assignments & Grades</h3>
-        </CardHeader>
+        <CardHeader>Assignments & Grades</CardHeader>
         <CardContent>
           <p>Loading academic information...</p>
         </CardContent>
@@ -80,9 +78,7 @@ export const StudentAssignmentsCard = ({ username }) => {
   if (error) {
     return (
       <Card>
-        <CardHeader>
-          <h3 className="font-bold">Assignments & Grades</h3>
-        </CardHeader>
+        <CardHeader>Assignments & Grades</CardHeader>
         <CardContent>
           <p className="text-red-600">Error: {error}</p>
         </CardContent>
@@ -94,7 +90,7 @@ export const StudentAssignmentsCard = ({ username }) => {
     <Card className="col-span-1 md:col-span-3">
       <CardHeader>
         <div className="flex justify-between items-center">
-          <h3 className="font-bold">Assignments & Grades</h3>
+          Assignments & Grades
           <div className="flex space-x-2">
             <button
               onClick={() => setActiveTab("assignments")}
@@ -125,27 +121,29 @@ export const StudentAssignmentsCard = ({ username }) => {
             {assignments.length === 0 ? (
               <p>No assignments available.</p>
             ) : (
-              <div className="space-y-4">
-                {assignments.map((assignment) => (
-                  <div
-                    key={assignment._id}
-                    className="border rounded p-4 hover:bg-gray-50"
-                  >
-                    <div className="flex justify-between">
-                      <h4 className="font-semibold">{assignment.title}</h4>
-                      <Badge className={getStatusColor(assignment.status)}>
-                        {assignment.status}
-                      </Badge>
+              <div className="max-h-80 overflow-y-auto pr-2">
+                <div className="space-y-4">
+                  {assignments.map((assignment) => (
+                    <div
+                      key={assignment._id}
+                      className="border rounded p-4 hover:bg-gray-50"
+                    >
+                      <div className="flex justify-between">
+                        <h4 className="font-semibold">{assignment.title}</h4>
+                        <Badge className={getStatusColor(assignment.status)}>
+                          {assignment.status}
+                        </Badge>
+                      </div>
+                      <p className="text-gray-600 text-sm mt-1">
+                        {assignment.subject}
+                      </p>
+                      <p className="mt-2">{assignment.description}</p>
+                      <div className="mt-2 text-sm text-gray-500">
+                        Due: {formatDate(assignment.dueDate)}
+                      </div>
                     </div>
-                    <p className="text-gray-600 text-sm mt-1">
-                      {assignment.subject}
-                    </p>
-                    <p className="mt-2">{assignment.description}</p>
-                    <div className="mt-2 text-sm text-gray-500">
-                      Due: {formatDate(assignment.dueDate)}
-                    </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
           </>
@@ -154,32 +152,34 @@ export const StudentAssignmentsCard = ({ username }) => {
             {grades.length === 0 ? (
               <p>No grades available.</p>
             ) : (
-              <div className="space-y-4">
-                {grades.map((grade) => (
-                  <div
-                    key={grade._id}
-                    className="border rounded p-4 hover:bg-gray-50"
-                  >
-                    <div className="flex justify-between">
-                      <h4 className="font-semibold">{grade.assignment}</h4>
-                      <span className="font-bold text-green-600">
-                        {grade.score}
-                      </span>
-                    </div>
-                    <p className="text-gray-600 text-sm mt-1">
-                      {grade.subject}
-                    </p>
-                    {grade.feedback && (
-                      <div className="mt-2 p-2 bg-gray-50 rounded">
-                        <p className="text-sm font-medium">Feedback:</p>
-                        <p className="text-sm">{grade.feedback}</p>
+              <div className="max-h-80 overflow-y-auto pr-2">
+                <div className="space-y-4">
+                  {grades.map((grade) => (
+                    <div
+                      key={grade._id}
+                      className="border rounded p-4 hover:bg-gray-50"
+                    >
+                      <div className="flex justify-between">
+                        <h4 className="font-semibold">{grade.assignment}</h4>
+                        <span className="font-bold text-green-600">
+                          {grade.score}
+                        </span>
                       </div>
-                    )}
-                    <div className="mt-2 text-sm text-gray-500">
-                      Graded on: {formatDate(grade.createdAt)}
+                      <p className="text-gray-600 text-sm mt-1">
+                        {grade.subject}
+                      </p>
+                      {grade.feedback && (
+                        <div className="mt-2 p-2 bg-gray-50 rounded">
+                          <p className="text-sm font-medium">Feedback:</p>
+                          <p className="text-sm">{grade.feedback}</p>
+                        </div>
+                      )}
+                      <div className="mt-2 text-sm text-gray-500">
+                        Graded on: {formatDate(grade.createdAt)}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             )}
           </>
