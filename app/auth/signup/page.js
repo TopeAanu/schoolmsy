@@ -6,6 +6,7 @@ import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import Navbar from "@/components/navbar/Navbar";
 
 export default function AdminSignup() {
   const router = useRouter();
@@ -14,7 +15,7 @@ export default function AdminSignup() {
     password: "",
     confirmPassword: "",
     email: "",
-    fullName: ""
+    fullName: "",
   });
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -64,17 +65,19 @@ export default function AdminSignup() {
         throw new Error(data.message || "Something went wrong");
       }
 
-      setSuccess("Admin account created successfully! Redirecting to sign in page...");
-      
+      setSuccess(
+        "Admin account created successfully! Redirecting to sign in page..."
+      );
+
       // Clear form
       setFormData({
         username: "",
         password: "",
         confirmPassword: "",
         email: "",
-        fullName: ""
+        fullName: "",
       });
-      
+
       // Redirect to signin page after a brief delay
       setTimeout(() => {
         router.push("/auth/signin");
@@ -87,118 +90,116 @@ export default function AdminSignup() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-full max-w-md">
-        <CardHeader className="text-center">
-          <h1 className="text-2xl font-bold">Admin Registration</h1>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <label htmlFor="username" className="block text-sm font-medium">
-                Username*
-              </label>
-              <Input
-                id="username"
-                name="username"
-                type="text"
-                required
-                value={formData.username}
-                onChange={handleChange}
-              />
-            </div>
+    <div>
+      <Navbar />
 
-            <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium">
-                Email*
-              </label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleChange}
-              />
-            </div>
+      <div
+        className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
+        style={{
+          backgroundImage:
+            "url('/schoolchildren-with-blackboard-background.jpg')",
+        }}
+      >
+        <Card className="w-full max-w-md bg-opacity-90">
+          <CardHeader>
+            <h1 className="text-2xl font-bold">Admin Registration</h1>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <label htmlFor="username" className="block text-sm font-medium">
+                  Username*
+                </label>
+                <Input
+                  id="username"
+                  name="username"
+                  type="text"
+                  required
+                  value={formData.username}
+                  onChange={handleChange}
+                />
+              </div>
 
-            <div className="space-y-2">
-              <label htmlFor="fullName" className="block text-sm font-medium">
-                Full Name
-              </label>
-              <Input
-                id="fullName"
-                name="fullName"
-                type="text"
-                value={formData.fullName}
-                onChange={handleChange}
-              />
-            </div>
+              <div className="space-y-2">
+                <label htmlFor="email" className="block text-sm font-medium">
+                  Email*
+                </label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </div>
 
-            <div className="space-y-2">
-              <label htmlFor="password" className="block text-sm font-medium">
-                Password*
-              </label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                required
-                value={formData.password}
-                onChange={handleChange}
-              />
-            </div>
+              <div className="space-y-2">
+                <label htmlFor="fullName" className="block text-sm font-medium">
+                  Full Name
+                </label>
+                <Input
+                  id="fullName"
+                  name="fullName"
+                  type="text"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                />
+              </div>
 
-            <div className="space-y-2">
-              <label htmlFor="confirmPassword" className="block text-sm font-medium">
-                Confirm Password*
-              </label>
-              <Input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                required
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-            </div>
+              <div className="space-y-2">
+                <label htmlFor="password" className="block text-sm font-medium">
+                  Password*
+                </label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </div>
 
-            <Button 
-              type="submit" 
-              className="w-full" 
-              disabled={isLoading}
-            >
-              {isLoading ? "Creating Account..." : "Create Admin Account"}
-            </Button>
-          </form>
+              <div className="space-y-2">
+                <label
+                  htmlFor="confirmPassword"
+                  className="block text-sm font-medium"
+                >
+                  Confirm Password*
+                </label>
+                <Input
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  type="password"
+                  required
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                />
+              </div>
 
-          {error && (
-            <Alert className="mt-4 bg-red-50 text-red-800 border-red-200">
-              <AlertDescription>
-                {error}
-              </AlertDescription>
-            </Alert>
-          )}
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Creating Account..." : "Create Admin Account"}
+              </Button>
+            </form>
 
-          {success && (
-            <Alert className="mt-4 bg-green-50 text-green-800 border-green-200">
-              <AlertDescription>
-                {success}
-              </AlertDescription>
-            </Alert>
-          )}
-        </CardContent>
-      </Card>
+            {error && (
+              <Alert className="mt-4 bg-red-50 text-red-800 border-red-200">
+                <AlertDescription>{error}</AlertDescription>
+              </Alert>
+            )}
+
+            {success && (
+              <Alert className="mt-4 bg-green-50 text-green-800 border-green-200">
+                <AlertDescription>{success}</AlertDescription>
+              </Alert>
+            )}
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
-
-
-
-
-
-
-
 
 // "use client";
 

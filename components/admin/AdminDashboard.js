@@ -12,6 +12,7 @@ import AddAssignmentForm from "./AddAssignmentForm";
 import AddGradeForm from "./AddGradeForm";
 import CredentialsAlert from "./CredentialsAlert";
 import MessageAlert from "./MessageAlert";
+import { AdminLogoutButton } from "@/components/admin/AdminLogoutButton";
 
 const AdminDashboard = () => {
   const [formData, setFormData] = useState({
@@ -58,14 +59,14 @@ const AdminDashboard = () => {
   const fetchStudents = async () => {
     setIsLoading(true);
     setError("");
-    
+
     try {
       if (!formData.adminUsername || !formData.adminPassword) {
         setError("Admin credentials required to fetch students");
         setIsLoading(false);
         return;
       }
-      
+
       const response = await fetch("/api/admin/student-list", {
         method: "POST",
         headers: {
@@ -76,12 +77,12 @@ const AdminDashboard = () => {
           adminPassword: formData.adminPassword,
         }),
       });
-      
+
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.message || "Failed to fetch students");
       }
-      
+
       const data = await response.json();
       setStudents(data);
     } catch (err) {
@@ -109,7 +110,9 @@ const AdminDashboard = () => {
       studentName: student.name,
       age: student.age?.toString() || "",
       grade: student.grade,
-      subjects: Array.isArray(student.subjects) ? student.subjects.join(", ") : student.subjects,
+      subjects: Array.isArray(student.subjects)
+        ? student.subjects.join(", ")
+        : student.subjects,
       image: student.image || "",
     });
     setActiveTab("create");
@@ -118,7 +121,11 @@ const AdminDashboard = () => {
 
   // Handle delete student
   const handleDeleteStudent = async (username) => {
-    if (!confirm(`Are you sure you want to delete the student account for ${username}?`)) {
+    if (
+      !confirm(
+        `Are you sure you want to delete the student account for ${username}?`
+      )
+    ) {
       return;
     }
 
@@ -180,7 +187,7 @@ const AdminDashboard = () => {
           name: formData.studentName,
           age: parseInt(formData.age),
           grade: formData.grade,
-          subjects: formData.subjects.split(",").map(s => s.trim()),
+          subjects: formData.subjects.split(",").map((s) => s.trim()),
           image: formData.image,
           adminUsername: formData.adminUsername,
           adminPassword: formData.adminPassword,
@@ -214,7 +221,6 @@ const AdminDashboard = () => {
           adminUsername: prev.adminUsername,
           adminPassword: prev.adminPassword,
         }));
-
       } catch (err) {
         setError(err.message);
       }
@@ -353,25 +359,28 @@ const AdminDashboard = () => {
 
   // Rest of the component remains the same as in the previous artifact
   return (
-    <div className="max-w-2xl mx-auto p-4">
+    <div className="max-w-2xl mx-auto p-4 ">
       <Card>
         <CardHeader>
           <div className="flex justify-between items-center">
+            {/* Left side - heading */}
             <h2 className="text-2xl font-bold">Admin Dashboard</h2>
-            <Button 
-              variant="outline" 
-              onClick={toggleManageStudents} 
-              className="text-sm"
-            >
-              {showManageStudents ? "Hide Student List" : "Manage Students"}
-            </Button>
+
+            {/* Right side - buttons grouped together */}
+            <div className="flex items-center space-x-4">
+              <Button
+                variant="outline"
+                onClick={toggleManageStudents}
+                className="text-sm"
+              >
+                {showManageStudents ? "Hide Student List" : "Manage Students"}
+              </Button>
+              <AdminLogoutButton />
+            </div>
           </div>
         </CardHeader>
         <CardContent>
-          <AdminCredentials 
-            formData={formData} 
-            setFormData={setFormData} 
-          />
+          <AdminCredentials formData={formData} setFormData={setFormData} />
 
           {showManageStudents ? (
             <ManageStudents
@@ -420,17 +429,11 @@ const AdminDashboard = () => {
             </Tabs>
           )}
 
-          {credentials && (
-            <CredentialsAlert credentials={credentials} />
-          )}
+          {credentials && <CredentialsAlert credentials={credentials} />}
 
-          {success && (
-            <MessageAlert type="success" message={success} />
-          )}
+          {success && <MessageAlert type="success" message={success} />}
 
-          {error && (
-            <MessageAlert type="error" message={error} />
-          )}
+          {error && <MessageAlert type="error" message={error} />}
         </CardContent>
       </Card>
     </div>

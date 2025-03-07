@@ -93,6 +93,7 @@ export default function SignIn() {
                   <label className="block mb-2">Username</label>
                   <Input
                     required
+                    placeholder="Enter your username"
                     value={credentials.username}
                     onChange={(e) =>
                       setCredentials({
@@ -108,6 +109,7 @@ export default function SignIn() {
                   <Input
                     type="password"
                     required
+                    placeholder="Enter your password"
                     value={credentials.password}
                     onChange={(e) =>
                       setCredentials({

@@ -67,7 +67,7 @@ const StudentLogin = () => {
         <div className="max-w-md w-full">
           <Card className="bg-white bg-opacity-90 shadow-xl">
             <CardHeader>
-              <h2 className="text-2xl font-bold text-center">Student Login</h2>
+              <h2 className="text-2xl font-bold">Student Login</h2>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
