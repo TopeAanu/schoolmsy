@@ -1,6 +1,5 @@
-// app/admin/signup/page.js
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -20,6 +19,16 @@ export default function AdminSignup() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  // Check for admin access token on component mount
+  useEffect(() => {
+    const token = sessionStorage.getItem("adminAccessToken");
+
+    if (!token) {
+      // Redirect to verification page if no token is found
+      router.push("/admin/verify");
+    }
+  }, [router]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,10 +55,13 @@ export default function AdminSignup() {
     }
 
     try {
+      const token = sessionStorage.getItem("adminAccessToken");
+
       const response = await fetch("/api/admin/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Admin-Access-Token": token, // Include token in headers
         },
         body: JSON.stringify({
           username: formData.username,
@@ -90,112 +102,131 @@ export default function AdminSignup() {
   };
 
   return (
-    <div>
-      <Navbar />
+    <div
+      className="min-h-screen bg-cover bg-center relative"
+      style={{
+        backgroundImage:
+          "url('/schoolchildren-with-blackboard-background.jpg')",
+      }}
+    >
+      {/* Semi-transparent overlay for better readability */}
+      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
-      <div
-        className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
-        style={{
-          backgroundImage:
-            "url('/schoolchildren-with-blackboard-background.jpg')",
-        }}
-      >
-        <Card className="w-full max-w-md bg-opacity-90">
-          <CardHeader>
-            <h1 className="text-2xl font-bold">Admin Registration</h1>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <label htmlFor="username" className="block text-sm font-medium">
-                  Username*
-                </label>
-                <Input
-                  id="username"
-                  name="username"
-                  type="text"
-                  required
-                  value={formData.username}
-                  onChange={handleChange}
-                />
-              </div>
+      {/* Content container */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center p-4">
+          <Card className="w-full max-w-md bg-white bg-opacity-90 shadow-xl">
+            <CardHeader>
+              <h1 className="text-2xl font-bold">Admin Registration</h1>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <label
+                    htmlFor="username"
+                    className="block text-sm font-medium"
+                  >
+                    Username*
+                  </label>
+                  <Input
+                    id="username"
+                    name="username"
+                    type="text"
+                    required
+                    placeholder="Enter username"
+                    value={formData.username}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label htmlFor="email" className="block text-sm font-medium">
-                  Email*
-                </label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="space-y-2">
+                  <label htmlFor="email" className="block text-sm font-medium">
+                    Email*
+                  </label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder="Enter email address"
+                    value={formData.email}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label htmlFor="fullName" className="block text-sm font-medium">
-                  Full Name
-                </label>
-                <Input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="space-y-2">
+                  <label
+                    htmlFor="fullName"
+                    className="block text-sm font-medium"
+                  >
+                    Full Name
+                  </label>
+                  <Input
+                    id="fullName"
+                    name="fullName"
+                    type="text"
+                    placeholder="Enter your full name"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label htmlFor="password" className="block text-sm font-medium">
-                  Password*
-                </label>
-                <Input
-                  id="password"
-                  name="password"
-                  type="password"
-                  required
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="space-y-2">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium"
+                  >
+                    Password*
+                  </label>
+                  <Input
+                    id="password"
+                    name="password"
+                    type="password"
+                    required
+                    placeholder="Create a password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label
-                  htmlFor="confirmPassword"
-                  className="block text-sm font-medium"
-                >
-                  Confirm Password*
-                </label>
-                <Input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  required
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                />
-              </div>
+                <div className="space-y-2">
+                  <label
+                    htmlFor="confirmPassword"
+                    className="block text-sm font-medium"
+                  >
+                    Confirm Password*
+                  </label>
+                  <Input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    required
+                    placeholder="Confirm your password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                  />
+                </div>
 
-              <Button type="submit" className="w-full" disabled={isLoading}>
-                {isLoading ? "Creating Account..." : "Create Admin Account"}
-              </Button>
-            </form>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? "Creating Account..." : "Create Admin"}
+                </Button>
+              </form>
 
-            {error && (
-              <Alert className="mt-4 bg-red-50 text-red-800 border-red-200">
-                <AlertDescription>{error}</AlertDescription>
-              </Alert>
-            )}
+              {error && (
+                <Alert className="mt-4 bg-red-50 text-red-800 border-red-200">
+                  <AlertDescription>{error}</AlertDescription>
+                </Alert>
+              )}
 
-            {success && (
-              <Alert className="mt-4 bg-green-50 text-green-800 border-green-200">
-                <AlertDescription>{success}</AlertDescription>
-              </Alert>
-            )}
-          </CardContent>
-        </Card>
+              {success && (
+                <Alert className="mt-4 bg-green-50 text-green-800 border-green-200">
+                  <AlertDescription>{success}</AlertDescription>
+                </Alert>
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

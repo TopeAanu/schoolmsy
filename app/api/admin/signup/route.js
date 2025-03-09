@@ -5,6 +5,18 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req) {
   try {
+    // Check for the admin access token in the request headers
+    const adminToken = req.headers.get("Admin-Access-Token");
+    const secretToken = process.env.ADMIN_ACCESS_TOKEN;
+    
+    // Verify the token
+    if (!adminToken || adminToken !== secretToken) {
+      return NextResponse.json(
+        { message: "Unauthorized access" },
+        { status: 401 }
+      );
+    }
+
     const { username, password, email, fullName } = await req.json();
     
     // Input validation
@@ -55,7 +67,7 @@ export async function POST(req) {
       error: error.message 
     }, { status: 500 });
   }
-} 
+}
 
 
 

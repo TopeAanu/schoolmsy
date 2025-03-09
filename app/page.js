@@ -4,23 +4,26 @@ import Navbar from "@/components/navbar/Navbar";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      {/* Main Content with background - you can add your image here */}
-      <div
-        className="flex-grow flex items-center justify-center bg-cover bg-center h-[calc(100vh-4rem)]"
-        style={{
-          backgroundImage:
-            "url('/schoolchildren-with-blackboard-background.jpg')",
-        }}
-      >
+    <div 
+      className="min-h-screen bg-cover bg-center relative"
+      style={{
+        backgroundImage: "url('/schoolchildren-with-blackboard-background.jpg')",
+      }}
+    >
+      {/* Absolute positioned navbar */}
+      <div className="absolute top-0 left-0 w-full z-10">
+        <Navbar />
+      </div>
+      
+      {/* Main Content without its own background image */}
+      <div className="flex-grow flex items-center justify-center h-screen">
         <div className="text-center bg-white bg-opacity-80 p-8 rounded-lg shadow-xl max-w-2xl">
           <h1 className="text-4xl font-bold text-blue-800 mb-4">
-            Welcome to the Student Portal
+            Hi👋, Welcome!
           </h1>
           <p className="text-xl text-gray-700 mb-6">
-            This is the homepage of the student management app. Please sign in
-            to access your profile.
+            This is the homepage of the school's app. Please login
+            to access your profile and academic progress.
           </p>
           <div className="flex justify-center space-x-4">
             <Link

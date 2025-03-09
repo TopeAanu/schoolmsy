@@ -72,68 +72,72 @@ export default function SignIn() {
   };
 
   return (
-    <div>
-      <Navbar />
-
-      <div
-        className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
-        style={{
-          backgroundImage:
-            "url('/schoolchildren-with-blackboard-background.jpg')",
-        }}
-      >
-        <div className="max-w-md w-full">
-          <Card className="bg-white bg-opacity-90 shadow-xl">
-            <CardHeader>
-              <h1 className="text-2xl font-bold">Admin Sign In</h1>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block mb-2">Username</label>
-                  <Input
-                    required
-                    placeholder="Enter your username"
-                    value={credentials.username}
-                    onChange={(e) =>
-                      setCredentials({
-                        ...credentials,
-                        username: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-
-                <div>
-                  <label className="block mb-2">Password</label>
-                  <Input
-                    type="password"
-                    required
-                    placeholder="Enter your password"
-                    value={credentials.password}
-                    onChange={(e) =>
-                      setCredentials({
-                        ...credentials,
-                        password: e.target.value,
-                      })
-                    }
-                  />
-                </div>
-
-                <Button type="submit" className="w-full">
-                  Sign In
-                </Button>
-              </form>
-
-              {error && (
-                <Alert className="mt-4 bg-red-50">
-                  <AlertDescription className="text-red-600">
-                    {error}
-                  </AlertDescription>
-                </Alert>
-              )}
-            </CardContent>
-          </Card>
+    <div 
+      className="min-h-screen bg-cover bg-center relative"
+      style={{
+        backgroundImage: "url('/schoolchildren-with-blackboard-background.jpg')",
+      }}
+    >
+      {/* Semi-transparent overlay for better readability if needed */}
+      <div className="absolute inset-0 bg-black bg-opacity-30"></div>
+      
+      {/* Content container */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-grow flex items-center justify-center p-4">
+          <div className="max-w-md w-full">
+            <Card className="bg-white bg-opacity-90 shadow-xl">
+              <CardHeader>
+                <h1 className="text-2xl font-bold">Admin Login</h1>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="block mb-2">Username</label>
+                    <Input
+                      required
+                      placeholder="Enter your username"
+                      value={credentials.username}
+                      onChange={(e) =>
+                        setCredentials({
+                          ...credentials,
+                          username: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+  
+                  <div>
+                    <label className="block mb-2">Password</label>
+                    <Input
+                      type="password"
+                      required
+                      placeholder="Enter your password"
+                      value={credentials.password}
+                      onChange={(e) =>
+                        setCredentials({
+                          ...credentials,
+                          password: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
+  
+                  <Button type="submit" className="w-full">
+                    Sign In
+                  </Button>
+                </form>
+  
+                {error && (
+                  <Alert className="mt-4 bg-red-50">
+                    <AlertDescription className="text-red-600">
+                      {error}
+                    </AlertDescription>
+                  </Alert>
+                )}
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
