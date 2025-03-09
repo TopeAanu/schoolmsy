@@ -362,18 +362,29 @@ const AdminDashboard = () => {
     <div className="max-w-2xl mx-auto p-4 ">
       <Card>
         <CardHeader>
-          <div className="flex justify-between items-center">
+          <div className="flex flex-row justify-between items-center gap-2">
             {/* Left side - heading */}
-            <h2 className="text-2xl font-bold">Admin Dashboard</h2>
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold truncate">
+              Admin Dashboard
+            </h2>
 
             {/* Right side - buttons grouped together */}
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
               <Button
                 variant="outline"
                 onClick={toggleManageStudents}
-                className="text-sm"
+                className="text-xs sm:text-sm whitespace-nowrap px-2 sm:px-4"
               >
-                {showManageStudents ? "Hide Student List" : "Manage Students"}
+                {showManageStudents ? (
+                  <span className="hidden sm:inline">Hide Student List</span>
+                ) : (
+                  <span className="hidden sm:inline">Manage Students</span>
+                )}
+                {showManageStudents ? (
+                  <span className="sm:hidden">Hide</span>
+                ) : (
+                  <span className="sm:hidden">Manage</span>
+                )}
               </Button>
               <AdminLogoutButton />
             </div>
@@ -392,12 +403,26 @@ const AdminDashboard = () => {
             />
           ) : (
             <Tabs value={activeTab} onValueChange={setActiveTab}>
-              <TabsList className="grid grid-cols-3 mb-6">
-                <TabsTrigger value="create">
-                  {isEditing ? "Edit Student" : "Create Student"}
+              <TabsList className="w-full grid grid-cols-3 mb-6">
+                <TabsTrigger
+                  value="create"
+                  className="text-xs sm:text-sm px-1 sm:px-2"
+                >
+                  {isEditing ? "Edit" : "Create"}
+                  <span className="hidden sm:inline">&nbsp;Student</span>
                 </TabsTrigger>
-                <TabsTrigger value="assignment">Add Assignment</TabsTrigger>
-                <TabsTrigger value="grade">Add Grades</TabsTrigger>
+                <TabsTrigger
+                  value="assignment"
+                  className="text-xs sm:text-sm px-1 sm:px-2"
+                >
+                  <span className="hidden sm:inline">Add </span>&nbsp;Assignment
+                </TabsTrigger>
+                <TabsTrigger
+                  value="grade"
+                  className="text-xs sm:text-sm px-1 sm:px-2"
+                >
+                  <span className="hidden sm:inline">Add </span>&nbsp;Grades
+                </TabsTrigger>
               </TabsList>
 
               <TabsContent value="create">

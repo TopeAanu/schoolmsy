@@ -6,7 +6,7 @@ import { Card, CardHeader, CardContent } from "../ui/card";
 export const StudentProfileCard = ({ studentData }) => {
   return (
     <Card>
-      <CardHeader>Student Profile</CardHeader>
+      {/* <CardHeader></CardHeader> */}
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Left section - Profile and basic info (1fr) */}

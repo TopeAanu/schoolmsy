@@ -7,7 +7,7 @@ const CreateStudentForm = ({
   formData,
   setFormData,
   handleSubmit,
-  handleCreateNewStudent
+  handleCreateNewStudent,
 }) => {
   return (
     <>
@@ -29,6 +29,7 @@ const CreateStudentForm = ({
             <label className="block mb-2">Student Name</label>
             <Input
               required
+              placeholder="Bolade"
               value={formData.studentName}
               onChange={(e) =>
                 setFormData({
@@ -38,7 +39,6 @@ const CreateStudentForm = ({
               }
             />
           </div>
-
           <div>
             <label className="block mb-2">Age</label>
             <Input
@@ -46,17 +46,18 @@ const CreateStudentForm = ({
               min="5"
               max="18"
               required
+              placeholder="Enter age"
               value={formData.age}
               onChange={(e) =>
                 setFormData({ ...formData, age: e.target.value })
               }
             />
           </div>
-
           <div>
             <label className="block mb-2">Grade</label>
             <Input
               required
+              placeholder="Enter grade"
               value={formData.grade}
               onChange={(e) =>
                 setFormData({ ...formData, grade: e.target.value })
@@ -65,16 +66,14 @@ const CreateStudentForm = ({
           </div>
 
           <div>
-            <label className="block mb-2">
-              Subjects (comma-separated)
-            </label>
+            <label className="block mb-2">Subjects (comma-separated)</label>
             <Input
               required
               value={formData.subjects}
               onChange={(e) =>
                 setFormData({ ...formData, subjects: e.target.value })
               }
-              placeholder="Math, Science, English"
+              placeholder="Math, English..."
             />
           </div>
 
@@ -92,7 +91,7 @@ const CreateStudentForm = ({
         </div>
 
         <Button type="submit" className="w-full">
-          {isEditing ? "Update Student" : "Create Student Account"}
+          {isEditing ? "Update Student" : "Create Student"}
         </Button>
       </form>
     </>

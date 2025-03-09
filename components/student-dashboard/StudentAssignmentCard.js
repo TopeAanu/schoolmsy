@@ -90,7 +90,7 @@ export const StudentAssignmentsCard = ({ username }) => {
     <Card className="col-span-1 md:col-span-3">
       <CardHeader>
         <div className="flex justify-between items-center">
-          Assignments & Grades
+          <span className="md:block hidden">Assignments & Grades</span>
           <div className="flex space-x-2">
             <button
               onClick={() => setActiveTab("assignments")}
@@ -169,8 +169,8 @@ export const StudentAssignmentsCard = ({ username }) => {
                         {grade.subject}
                       </p>
                       {grade.feedback && (
-                        <div className="mt-2 p-2 bg-gray-50 rounded">
-                          <p className="text-sm font-medium">Feedback:</p>
+                        <div className="flex items-center">
+                          <p className="text-sm font-medium mr-1">Feedback:</p>
                           <p className="text-sm">{grade.feedback}</p>
                         </div>
                       )}
