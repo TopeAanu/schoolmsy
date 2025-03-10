@@ -39,11 +39,11 @@ export default function AdminVerification() {
         throw new Error(data.message || "Invalid token");
       }
 
-      // Store the token in session storage
-      sessionStorage.setItem("adminAccessToken", token);
+      // Store the verified status in session storage
+      sessionStorage.setItem("adminVerified", "true");
       
       // Redirect to the admin signup page
-      router.push("/auth/signup");
+      router.push("/admin/signup");
     } catch (error) {
       setError(error.message);
     } finally {
@@ -54,7 +54,7 @@ export default function AdminVerification() {
   return (
     <div className="relative min-h-screen">
       {/* Background image positioned absolute to be behind everything */}
-      <div 
+      <div
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{
           backgroundImage: "url('/schoolchildren-with-blackboard-background.jpg')",
@@ -65,7 +65,7 @@ export default function AdminVerification() {
       <div className="fixed top-0 left-0 right-0 z-20">
         <Navbar />
       </div>
-  
+    
       {/* Main content area with padding-top to account for fixed navbar */}
       <div className="relative z-10 min-h-screen flex items-center justify-center p-4 pt-16">
         <Card className="w-full max-w-md bg-white bg-opacity-90">
@@ -87,12 +87,12 @@ export default function AdminVerification() {
                   required
                 />
               </div>
-  
+            
               <Button type="submit" className="w-full" disabled={isLoading}>
                 {isLoading ? "Verifying..." : "Verify"}
               </Button>
             </form>
-  
+          
             {error && (
               <Alert className="mt-4 bg-red-50 text-red-800 border-red-200">
                 <AlertDescription>{error}</AlertDescription>

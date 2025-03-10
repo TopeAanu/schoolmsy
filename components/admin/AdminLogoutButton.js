@@ -16,7 +16,7 @@ export const AdminLogoutButton = () => {
 
   const confirmLogout = () => {
     localStorage.removeItem("studentAuth");
-    router.push("/auth/signin");
+    router.push("/admin/signin");
   };
 
   const cancelLogout = () => {

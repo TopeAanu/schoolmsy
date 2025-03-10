@@ -29,12 +29,12 @@ const Navbar = () => {
             <Link href="/student/login" className="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">
               Student Login
             </Link>
-            <Link href="/auth/signin" className="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">
+            <Link href="/admin/signin" className="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">
               Admin Login
             </Link>
             {/* Commented out signup button */}
             
-            <Link href="/auth/signup" className="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">
+            <Link href="/admin/signup" className="px-3 py-2 text-gray-700 hover:text-blue-600 transition-colors">
               Admin Signup
             </Link>
            
@@ -80,12 +80,12 @@ const Navbar = () => {
           <Link href="/student/login" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">
             Student Login
           </Link>
-          <Link href="/auth/signin" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">
+          <Link href="/admin/signin" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">
             Admin Login
           </Link>
           {/* Commented out signup button */}
           
-          <Link href="/auth/signup" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">
+          <Link href="/admin/signup" className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md">
             Admin Signup
           </Link>
          

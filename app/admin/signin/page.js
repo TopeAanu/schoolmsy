@@ -28,7 +28,7 @@
 //   );
 // }
 
-// app/auth/signin/page.js
+// app/admin/signin/page.js
 "use client";
 import { useState } from "react";
 import { signIn } from "next-auth/react";

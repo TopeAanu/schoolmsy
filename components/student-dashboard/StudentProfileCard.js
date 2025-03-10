@@ -6,7 +6,7 @@ import { Card, CardHeader, CardContent } from "../ui/card";
 export const StudentProfileCard = ({ studentData }) => {
   return (
     <Card>
-      {/* <CardHeader></CardHeader> */}
+      <CardHeader>Student Profile</CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Left section - Profile and basic info (1fr) */}
@@ -48,9 +48,7 @@ export const StudentProfileCard = ({ studentData }) => {
 
           {/* Right section - Academic progress (2fr) with increased line height */}
           <div className="md:col-span-2 md:border-l border-gray-200 md:pl-4 pt-4 md:pt-0 border-t md:border-t-0">
-            <h5 className="font-semibold mb-3 text-center md:text-left">
-              Academic Progress
-            </h5>
+            <h5 className="font-semibold mb-3 text-left">Academic Progress</h5>
 
             <div className="space-y-3 leading-relaxed">
               <div className="flex justify-between">

@@ -92,7 +92,7 @@ export default function AdminSignup() {
 
       // Redirect to signin page after a brief delay
       setTimeout(() => {
-        router.push("/auth/signin");
+        router.push("/admin/signin");
       }, 2000);
     } catch (error) {
       setError(error.message);

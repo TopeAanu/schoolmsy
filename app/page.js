@@ -22,8 +22,7 @@ export default function Home() {
             Hi👋, Welcome!
           </h1>
           <p className="text-xl text-gray-700 mb-6">
-            This is the homepage of the school's app. Please login
-            to access your profile and academic progress.
+            This is the homepage of the school's website. Please login to your profile.
           </p>
           <div className="flex justify-center space-x-4">
             <Link

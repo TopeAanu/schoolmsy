@@ -6,8 +6,12 @@ const connections = {
     uri: process.env.MONGODB_ADMIN_URI,
     dbName: "users",
   },
+  authentication: {
+    uri: process.env.MONGODB_AUTHENTICATION_URI,
+    dbName: "admin-signup-access",
+  },
   student: {
-    uri: process.env.MONGODB_STUDENT_PROFILE_URI || process.env.MONGODB_STUDENT_URI, // Use the first occurrence
+    uri: process.env.MONGODB_STUDENT_PROFILE_URI || process.env.MONGODB_STUDENT_URI,
     dbName: "student-profile",
   },
   assignments: {
@@ -22,6 +26,7 @@ const connections = {
 
 const clients = {
   admin: null,
+  authentication: null,
   student: null,
   assignments: null,
   grades: null,
@@ -29,6 +34,7 @@ const clients = {
 
 const clientPromises = {
   admin: null,
+  authentication: null,
   student: null,
   assignments: null,
   grades: null,
@@ -43,14 +49,12 @@ export async function connectToDB(type = "student") {
     if (process.env.NODE_ENV === "development") {
       if (!global._mongoClientPromises) global._mongoClientPromises = {};
       if (!global._mongoClientPromises[type]) {
-        // Removed deprecated options
         clients[type] = new MongoClient(connections[type].uri);
         global._mongoClientPromises[type] = clients[type].connect();
       }
       clientPromises[type] = global._mongoClientPromises[type];
     } else {
       if (!clientPromises[type]) {
-        // Removed deprecated options
         clients[type] = new MongoClient(connections[type].uri);
         clientPromises[type] = clients[type].connect();
       }

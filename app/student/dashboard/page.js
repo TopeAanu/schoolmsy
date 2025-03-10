@@ -21,11 +21,15 @@ const StudentDashboard = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-2 sm:p-4">
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4 sm:mb-6 gap-2">
-        <h1 className="text-2xl sm:text-3xl font-bold">Student Dashboard</h1>
-        <StudentLogoutButton />
+      <div className="flex flex-row justify-between items-center mb-4 sm:mb-6 gap-3 pt-2 px-2 sm:pt-3 sm:px-3">
+        <h1 className="text-2xl sm:text-3xl font-bold py-1 px-1">
+          Student Dashboard
+        </h1>
+        <div className="py-1 px-1">
+          <StudentLogoutButton />
+        </div>
       </div>
-  
+
       {error ? (
         <Alert className="bg-red-50">
           <AlertDescription className="text-red-600">{error}</AlertDescription>
