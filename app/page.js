@@ -27,7 +27,7 @@ export default function Home() {
           <div className="flex justify-center space-x-4">
             <Link
               href="/student/login"
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium text-lg transition-colors duration-300"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-7 py-2 rounded-lg font-medium text-lg transition-colors duration-300"
             >
               Login
             </Link>

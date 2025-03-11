@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/navbar/Navbar";
+import { Eye, EyeOff } from "lucide-react"; // Import icons for the toggle
 
 const StudentLogin = () => {
   const router = useRouter();
@@ -15,6 +16,7 @@ const StudentLogin = () => {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false); // State to track password visibility
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,6 +54,11 @@ const StudentLogin = () => {
     } finally {
       setLoading(false);
     }
+  };
+
+  // Toggle password visibility
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -93,19 +100,32 @@ const StudentLogin = () => {
 
                   <div>
                     <label className="block mb-2 text-sm sm:text-base font-medium">Password</label>
-                    <Input
-                      type="password"
-                      required
-                      value={credentials.password}
-                      onChange={(e) =>
-                        setCredentials({
-                          ...credentials,
-                          password: e.target.value,
-                        })
-                      }
-                      placeholder="Enter your password"
-                      className="w-full"
-                    />
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        required
+                        value={credentials.password}
+                        onChange={(e) =>
+                          setCredentials({
+                            ...credentials,
+                            password: e.target.value,
+                          })
+                        }
+                        placeholder="Enter your password"
+                        className="w-full"
+                      />
+                      <button
+                        type="button"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        onClick={togglePasswordVisibility}
+                      >
+                        {showPassword ? (
+                          <EyeOff size={18} />
+                        ) : (
+                          <Eye size={18} />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
                   <Button 
