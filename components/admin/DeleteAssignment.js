@@ -68,9 +68,9 @@
 //               required
 //               type="text"
 //               value={adminCredentials.adminUsername}
-//               onChange={(e) => 
+//               onChange={(e) =>
 //                 setAdminCredentials(prev => ({
-//                   ...prev, 
+//                   ...prev,
 //                   adminUsername: e.target.value
 //                 }))
 //               }
@@ -83,9 +83,9 @@
 //               required
 //               type="password"
 //               value={adminCredentials.adminPassword}
-//               onChange={(e) => 
+//               onChange={(e) =>
 //                 setAdminCredentials(prev => ({
-//                   ...prev, 
+//                   ...prev,
 //                   adminPassword: e.target.value
 //                 }))
 //               }
@@ -102,9 +102,9 @@
 //               placeholder="Enter assignment ID to delete"
 //             />
 //           </div>
-//           <Button 
-//             type="submit" 
-//             variant="destructive" 
+//           <Button
+//             type="submit"
+//             variant="destructive"
 //             className="w-full"
 //             disabled={isLoading}
 //           >

@@ -23,10 +23,9 @@ export async function POST(req) {
     const result = await studentsCollection.deleteOne({ username });
 
     if (result.deletedCount === 0) {
-      return new Response(
-        JSON.stringify({ message: "Student not found" }),
-        { status: 404 }
-      );
+      return new Response(JSON.stringify({ message: "Student not found" }), {
+        status: 404,
+      });
     }
 
     return new Response(

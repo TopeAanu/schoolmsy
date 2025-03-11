@@ -78,15 +78,16 @@ export default function SignIn() {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen bg-cover bg-center relative"
       style={{
-        backgroundImage: "url('/schoolchildren-with-blackboard-background.jpg')",
+        backgroundImage:
+          "url('/schoolchildren-with-blackboard-background.jpg')",
       }}
     >
       {/* Semi-transparent overlay for better readability if needed */}
       <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-      
+
       {/* Content container */}
       <div className="relative z-10 min-h-screen flex flex-col">
         <Navbar />
@@ -112,7 +113,7 @@ export default function SignIn() {
                       }
                     />
                   </div>
-  
+
                   <div>
                     <label className="block mb-2">Password</label>
                     <div className="relative">
@@ -141,12 +142,12 @@ export default function SignIn() {
                       </button>
                     </div>
                   </div>
-  
+
                   <Button type="submit" className="w-full">
                     Sign In
                   </Button>
                 </form>
-  
+
                 {error && (
                   <Alert className="mt-4 bg-red-50">
                     <AlertDescription className="text-red-600">

@@ -29,23 +29,26 @@ export async function GET(req) {
     const gradesCollection = db.collection("grades");
 
     // Get all unique subjects from assignments collection for this user
-    const assignmentSubjects = await assignmentsCollection.distinct("subject", { username });
+    const assignmentSubjects = await assignmentsCollection.distinct("subject", {
+      username,
+    });
 
     // Build a complete list of subjects from both profile and assignments
     let allSubjects = new Set();
-    
+
     // Add subjects from student profile if they exist
     if (student.subjects && Array.isArray(student.subjects)) {
-      student.subjects.forEach(subject => {
-        const subjectName = typeof subject === 'string' ? subject : subject.name;
+      student.subjects.forEach((subject) => {
+        const subjectName =
+          typeof subject === "string" ? subject : subject.name;
         if (subjectName) {
           allSubjects.add(subjectName);
         }
       });
     }
-    
+
     // Add subjects from assignments
-    assignmentSubjects.forEach(subject => {
+    assignmentSubjects.forEach((subject) => {
       if (subject) {
         allSubjects.add(subject);
       }
@@ -108,14 +111,15 @@ export async function GET(req) {
 
         // Find the original subject object if it exists in student.subjects
         let subjectMetadata = { name: subjectName };
-        
+
         if (student.subjects && Array.isArray(student.subjects)) {
-          const originalSubject = student.subjects.find(s => 
-            (typeof s === 'string' && s === subjectName) || 
-            (typeof s === 'object' && s.name === subjectName)
+          const originalSubject = student.subjects.find(
+            (s) =>
+              (typeof s === "string" && s === subjectName) ||
+              (typeof s === "object" && s.name === subjectName)
           );
-          
-          if (originalSubject && typeof originalSubject === 'object') {
+
+          if (originalSubject && typeof originalSubject === "object") {
             subjectMetadata = originalSubject;
           }
         }
@@ -126,7 +130,7 @@ export async function GET(req) {
           assignments: subjectAssignments,
           currentGrade,
           // Include any other subject properties from the DB
-          ...(typeof subjectMetadata === 'object' ? subjectMetadata : {}),
+          ...(typeof subjectMetadata === "object" ? subjectMetadata : {}),
         };
       })
     );

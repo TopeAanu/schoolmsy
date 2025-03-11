@@ -28,8 +28,8 @@
 //     }
 
 //     // Delete the assignment
-//     const result = await assignmentsCollection.deleteOne({ 
-//       _id: new ObjectId(assignmentId) 
+//     const result = await assignmentsCollection.deleteOne({
+//       _id: new ObjectId(assignmentId)
 //     });
 
 //     if (result.deletedCount === 0) {
@@ -38,8 +38,8 @@
 //       });
 //     }
 
-//     return new Response(JSON.stringify({ message: "Assignment deleted successfully" }), { 
-//       status: 200 
+//     return new Response(JSON.stringify({ message: "Assignment deleted successfully" }), {
+//       status: 200
 //     });
 
 //   } catch (error) {

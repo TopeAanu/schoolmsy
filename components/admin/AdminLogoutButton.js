@@ -28,9 +28,7 @@ export const AdminLogoutButton = () => {
       {showAlert && (
         <div className="fixed top-0 left-0 right-0 flex justify-center z-50">
           <div className="mt-4 p-3 bg-white bg-opacity-80 border flex items-center space-x-4">
-            <p className="text-sm">
-              Logout as admin?
-            </p>
+            <p className="text-sm">Logout as admin?</p>
             <div className="flex space-x-2">
               <Button onClick={confirmLogout} size="sm">
                 Yes

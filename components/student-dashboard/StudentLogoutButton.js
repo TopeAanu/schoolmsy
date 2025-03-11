@@ -42,11 +42,8 @@ export const StudentLogoutButton = () => {
           </div>
         </div>
       )}
-  
-      <Button 
-        onClick={initiateLogout} 
-        variant="outline"
-      >
+
+      <Button onClick={initiateLogout} variant="outline">
         Logout
       </Button>
     </>

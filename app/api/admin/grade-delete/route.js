@@ -28,8 +28,8 @@
 //     }
 
 //     // Delete the grade
-//     const result = await gradesCollection.deleteOne({ 
-//       _id: new ObjectId(gradeId) 
+//     const result = await gradesCollection.deleteOne({
+//       _id: new ObjectId(gradeId)
 //     });
 
 //     if (result.deletedCount === 0) {
@@ -38,8 +38,8 @@
 //       });
 //     }
 
-//     return new Response(JSON.stringify({ message: "Grade deleted successfully" }), { 
-//       status: 200 
+//     return new Response(JSON.stringify({ message: "Grade deleted successfully" }), {
+//       status: 200
 //     });
 
 //   } catch (error) {

@@ -17,10 +17,12 @@ export async function POST(req) {
     // Connect to admin database
     const adminDb = await connectToDB("admin");
     const usersCollection = adminDb.collection("users");
-    
+
     // Find the admin user by username
-    const adminUser = await usersCollection.findOne({ username: adminUsername });
-    
+    const adminUser = await usersCollection.findOne({
+      username: adminUsername,
+    });
+
     // If no user found, unauthorized
     if (!adminUser) {
       console.log("No admin user found with username:", adminUsername);
@@ -28,10 +30,10 @@ export async function POST(req) {
         status: 401,
       });
     }
-    
+
     // Verify the password with bcrypt compare
     const passwordValid = await compare(adminPassword, adminUser.password);
-    
+
     if (!passwordValid) {
       console.log("Invalid password for admin:", adminUsername);
       return new Response(JSON.stringify({ message: "Unauthorized" }), {

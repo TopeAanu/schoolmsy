@@ -62,15 +62,16 @@ const StudentLogin = () => {
   };
 
   return (
-    <div 
+    <div
       className="min-h-screen bg-cover bg-center relative"
       style={{
-        backgroundImage: "url('/schoolchildren-with-blackboard-background.jpg')",
+        backgroundImage:
+          "url('/schoolchildren-with-blackboard-background.jpg')",
       }}
     >
       {/* Semi-transparent overlay for better readability if needed */}
       <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-      
+
       {/* Content container */}
       <div className="relative z-10 min-h-screen flex flex-col">
         <Navbar />
@@ -83,7 +84,9 @@ const StudentLogin = () => {
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block mb-2 text-sm sm:text-base font-medium">Username</label>
+                    <label className="block mb-2 text-sm sm:text-base font-medium">
+                      Username
+                    </label>
                     <Input
                       required
                       value={credentials.username}
@@ -99,7 +102,9 @@ const StudentLogin = () => {
                   </div>
 
                   <div>
-                    <label className="block mb-2 text-sm sm:text-base font-medium">Password</label>
+                    <label className="block mb-2 text-sm sm:text-base font-medium">
+                      Password
+                    </label>
                     <div className="relative">
                       <Input
                         type={showPassword ? "text" : "password"}
@@ -128,9 +133,9 @@ const StudentLogin = () => {
                     </div>
                   </div>
 
-                  <Button 
-                    type="submit" 
-                    className="w-full mt-2 md:mt-4" 
+                  <Button
+                    type="submit"
+                    className="w-full mt-2 md:mt-4"
                     disabled={loading}
                   >
                     {loading ? "Logging in..." : "Login"}

@@ -11,7 +11,9 @@ const connections = {
     dbName: "admin-signup-access",
   },
   student: {
-    uri: process.env.MONGODB_STUDENT_PROFILE_URI || process.env.MONGODB_STUDENT_URI,
+    uri:
+      process.env.MONGODB_STUDENT_PROFILE_URI ||
+      process.env.MONGODB_STUDENT_URI,
     dbName: "student-profile",
   },
   assignments: {
@@ -44,7 +46,7 @@ export async function connectToDB(type = "student") {
   if (!connections[type]) {
     throw new Error(`Invalid database type: ${type}`);
   }
-  
+
   try {
     if (process.env.NODE_ENV === "development") {
       if (!global._mongoClientPromises) global._mongoClientPromises = {};
@@ -59,7 +61,7 @@ export async function connectToDB(type = "student") {
         clientPromises[type] = clients[type].connect();
       }
     }
-    
+
     const client = await clientPromises[type];
     return client.db(connections[type].dbName);
   } catch (error) {

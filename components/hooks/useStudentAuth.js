@@ -39,8 +39,8 @@ export const useStudentAuth = () => {
         );
 
         if (
-          !profileResponse.ok || 
-          !assignmentsResponse.ok || 
+          !profileResponse.ok ||
+          !assignmentsResponse.ok ||
           !subjectsResponse.ok
         ) {
           if (

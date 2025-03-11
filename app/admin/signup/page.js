@@ -233,7 +233,11 @@ export default function AdminSignup() {
                       className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
                       onClick={toggleConfirmPasswordVisibility}
                     >
-                      {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                      {showConfirmPassword ? (
+                        <EyeOff size={18} />
+                      ) : (
+                        <Eye size={18} />
+                      )}
                     </button>
                   </div>
                 </div>
@@ -261,37 +265,3 @@ export default function AdminSignup() {
     </div>
   );
 }
-
-// "use client";
-
-// // /auth/signup/page.js
-// export default function SignUp() {
-//   const handleSubmit = async (e) => {
-//     e.preventDefault();
-//     const res = await fetch("/api/admin/signup", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({
-//         username: e.target.username.value,
-//         password: e.target.password.value,
-//       }),
-//     });
-
-//     const data = await res.json();
-//     if (res.status === 201) {
-//       alert(data.message);
-//     } else {
-//       alert(data.message);
-//     }
-//   };
-
-//   return (
-//     <form onSubmit={handleSubmit}>
-//       <input name="username" type="text" placeholder="Username" required />
-//       <input name="password" type="password" placeholder="Password" required />
-//       <button type="submit">Sign Up</button>
-//     </form>
-//   );
-// }

@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 
-const ManageStudents = ({ 
-  isLoading, 
-  students, 
-  fetchStudents, 
-  handleEditStudent, 
-  handleDeleteStudent 
+const ManageStudents = ({
+  isLoading,
+  students,
+  fetchStudents,
+  handleEditStudent,
+  handleDeleteStudent,
 }) => {
   return (
     <div className="mb-6">
@@ -15,7 +15,7 @@ const ManageStudents = ({
           Refresh List
         </Button>
       </div>
-      
+
       {isLoading ? (
         <p>Loading students...</p>
       ) : students.length > 0 ? (
@@ -40,9 +40,15 @@ const ManageStudents = ({
             <tbody className="bg-white divide-y divide-gray-200">
               {students.map((student) => (
                 <tr key={student.username}>
-                  <td className="px-4 py-2 whitespace-nowrap">{student.name}</td>
-                  <td className="px-4 py-2 whitespace-nowrap">{student.username}</td>
-                  <td className="px-4 py-2 whitespace-nowrap">{student.grade}</td>
+                  <td className="px-4 py-2 whitespace-nowrap">
+                    {student.name}
+                  </td>
+                  <td className="px-4 py-2 whitespace-nowrap">
+                    {student.username}
+                  </td>
+                  <td className="px-4 py-2 whitespace-nowrap">
+                    {student.grade}
+                  </td>
                   <td className="px-4 py-2 whitespace-nowrap">
                     <div className="flex space-x-2">
                       <Button

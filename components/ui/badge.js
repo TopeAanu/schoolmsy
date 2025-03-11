@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 // components/ui/badge.jsx
 import React from "react";
