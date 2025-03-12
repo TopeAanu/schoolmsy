@@ -1,6 +1,6 @@
-// /api/admin/students/route.js
 import { hash } from "bcryptjs";
 import { connectToDB } from "@/app/lib/db";
+import { compare } from "bcryptjs";
 
 export async function POST(req) {
   try {
@@ -14,11 +14,15 @@ export async function POST(req) {
       image,
     } = await req.json();
 
-    // Verify admin credentials
-    if (
-      adminUsername !== process.env.ADMIN_USERNAME ||
-      adminPassword !== process.env.ADMIN_PASSWORD
-    ) {
+    // Connect to admin database to verify credentials
+    const adminDb = await connectToDB("admin");
+    const adminCollection = adminDb.collection("users");
+
+    // Find the admin by username
+    const admin = await adminCollection.findOne({ username: adminUsername });
+
+    // Verify admin exists and password matches
+    if (!admin || !(await compare(adminPassword, admin.password))) {
       return new Response(JSON.stringify({ message: "Unauthorized" }), {
         status: 401,
       });

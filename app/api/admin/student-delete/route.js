@@ -1,15 +1,19 @@
-// app/api/admin/student-delete/route.js
 import { connectToDB } from "@/app/lib/db";
+import { compare } from "bcryptjs";
 
 export async function POST(req) {
   try {
     const { adminUsername, adminPassword, username } = await req.json();
 
-    // Verify admin credentials
-    if (
-      adminUsername !== process.env.ADMIN_USERNAME ||
-      adminPassword !== process.env.ADMIN_PASSWORD
-    ) {
+    // Connect to admin database to verify credentials
+    const adminDb = await connectToDB("admin");
+    const adminCollection = adminDb.collection("users");
+
+    // Find the admin by username
+    const admin = await adminCollection.findOne({ username: adminUsername });
+
+    // Verify admin exists and password matches
+    if (!admin || !(await compare(adminPassword, admin.password))) {
       return new Response(JSON.stringify({ message: "Unauthorized" }), {
         status: 401,
       });
