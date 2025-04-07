@@ -1,2 +1,13 @@
-## Student Management System SMS
-SMS is a modern-day web app for primary and secondary schools. It helps school administrators (teachers and principals) to create and manage students' information like the student profile. It generates unique username and password for each profile created for the student. It also creates a unique identifier for admins to login and manage the student's info. Built with JavaScript, Nextjs, tailwind, mongoDB, and Nextauth. 
+## Student Management System (School-msy)
+School-msy is a school management system app. The following are the functionaliies:
+
+> create student profile
+> authenticate admin
+> generate a username and password for student
+> assign assignment to student(admin)
+> grade student assignment(admin)
+> auth to signup new admin
+> edit student data
+
+Built with JavaScript, Nextjs, Tailwind, MongoDB, and netlify for deployment.
+View project [here](https://schoolmsy.netlify.app/)
