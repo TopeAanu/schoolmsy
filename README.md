@@ -6,7 +6,7 @@ School-msy is a school management system app. The following are the functionalii
 > authenticate admin
 > 
 > generate a username and password for student
-
+> 
 > assign assignment to student(admin)
 > 
 > grade student assignment(admin)
