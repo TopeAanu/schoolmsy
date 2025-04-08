@@ -20,7 +20,7 @@ const AddAssignmentForm = ({
               username: e.target.value,
             })
           }
-          placeholder="johndoe"
+          placeholder="Name"
         />
       </div>
 
