@@ -23,12 +23,12 @@ export default function AdminSignup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
-  // Check for admin access token on component mount
+  // Check for admin verification on component mount
   useEffect(() => {
-    const token = sessionStorage.getItem("adminAccessToken");
+    const isVerified = sessionStorage.getItem("adminVerified");
 
-    if (!token) {
-      // Redirect to verification page if no token is found
+    if (!isVerified) {
+      // Redirect to verification page if not verified
       router.push("/admin/verify");
     }
   }, [router]);
