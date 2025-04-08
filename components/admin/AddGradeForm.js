@@ -13,7 +13,7 @@ const AddGradeForm = ({ gradeData, setGradeData, handleGradeSubmit }) => {
           onChange={(e) =>
             setGradeData({ ...gradeData, username: e.target.value })
           }
-          placeholder="Name"
+          placeholder="bolade"
         />
       </div>
 
