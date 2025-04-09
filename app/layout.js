@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "SchoolMSy",
-  description: "A School Management System web app",
+  title: "SchoolMsy",
+  description:
+    "SchoolMsy is a School Management System App for creating, maintaining and managing students data",
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
