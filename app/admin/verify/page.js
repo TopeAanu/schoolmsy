@@ -5,7 +5,7 @@ import { VerificationForm } from "@/components/admin/VerificationForm";
 
 export default function AdminVerification() {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen text-black dark:text-dark">
       <div
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{

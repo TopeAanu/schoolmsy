@@ -89,7 +89,7 @@ export default function SignIn() {
       <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
       {/* Content container */}
-      <div className="relative z-10 min-h-screen flex flex-col">
+      <div className="relative z-10 min-h-screen flex flex-col text-black dark:text-dark">
         <Navbar />
         <div className="flex-grow flex items-center justify-center p-4">
           <div className="max-w-md w-full">

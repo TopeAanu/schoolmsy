@@ -20,7 +20,7 @@ const StudentDashboard = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto p-2 sm:p-4">
+    <div className="max-w-4xl mx-auto p-2 sm:p-4 text-black dark:text-dark">
       <div className="flex flex-row justify-between items-center mb-4 sm:mb-6 gap-3 pt-2 px-2 sm:pt-3 sm:px-3">
         <h1 className="text-2xl sm:text-3xl font-bold py-1 px-1">
           Student Dashboard

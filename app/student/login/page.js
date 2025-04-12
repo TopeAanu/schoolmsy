@@ -63,7 +63,7 @@ const StudentLogin = () => {
 
   return (
     <div
-      className="min-h-screen bg-cover bg-center relative"
+      className="min-h-screen bg-cover bg-center relative text-black dark:text-dark"
       style={{
         backgroundImage:
           "url('/schoolchildren-with-blackboard-background.jpg')",
