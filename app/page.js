@@ -20,7 +20,7 @@ export default function Home() {
       <div className="flex-grow flex items-center justify-center h-screen">
         <div className="text-center bg-white bg-opacity-80 p-8 rounded-lg shadow-xl max-w-2xl">
           <h1 className="text-4xl font-bold text-blue-800 mb-4">
-            Hi👋, Welcome!
+            Hi👋,
           </h1>
           <p className="text-xl text-gray-700 mb-6">
             Welcome to the school's Management System. Please login to your profile.
