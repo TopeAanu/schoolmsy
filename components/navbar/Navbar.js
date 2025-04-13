@@ -122,10 +122,10 @@ const Navbar = () => {
       <div className={`${isMenuOpen ? "block" : "hidden"} md:hidden`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 border-t">
           <Link
-            href="#"
+            href="/"
             className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md"
           >
-            School Activities
+            Home
           </Link>
           <Link
             href="/student/login"
