@@ -65,26 +65,25 @@ const StudentLogin = () => {
     <div
       className="min-h-screen bg-cover bg-center relative text-black dark:text-dark"
       style={{
-        backgroundImage:
-          "url('/schoolchildren-with-blackboard-background.jpg')",
+        backgroundImage: "url('/school4.jpg')",
       }}
     >
       {/* Semi-transparent overlay for better readability if needed */}
       <div className="absolute inset-0 bg-black bg-opacity-30"></div>
 
       {/* Content container */}
-      <div className="relative z-10 min-h-screen flex flex-col">
+      <div className="relative z-10 min-h-screen flex flex-col ">
         <Navbar />
         <div className="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
           <div className="max-w-md w-full">
-            <Card className="bg-white bg-opacity-90 shadow-xl">
+            <Card className="bg-gray-600 bg-opacity-60 shadow-xl rounded-none border-2 border-white">
               <CardHeader className="pb-4 md:pb-4">
-                <h2 className="text-2xl font-bold">Student Login</h2>
+                <h2 className="text-2xl text-white font-bold">Student Login</h2>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block mb-2 text-sm sm:text-base font-medium">
+                    <label className="block mb-2 text-sm sm:text-base font-medium text-white">
                       Username
                     </label>
                     <Input
@@ -97,12 +96,12 @@ const StudentLogin = () => {
                         })
                       }
                       placeholder="Enter your username"
-                      className="w-full"
+                      className="w-full bg-gray-500 text-white placeholder:text-gray-300"
                     />
                   </div>
 
                   <div>
-                    <label className="block mb-2 text-sm sm:text-base font-medium">
+                    <label className="block mb-2 text-sm sm:text-base font-medium text-white">
                       Password
                     </label>
                     <div className="relative">
@@ -117,11 +116,11 @@ const StudentLogin = () => {
                           })
                         }
                         placeholder="Enter your password"
-                        className="w-full"
+                        className="w-full bg-gray-500 text-white placeholder:text-gray-300"
                       />
                       <button
                         type="button"
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-300 hover:text-white focus:outline-none"
                         onClick={togglePasswordVisibility}
                       >
                         {showPassword ? (
@@ -135,7 +134,7 @@ const StudentLogin = () => {
 
                   <Button
                     type="submit"
-                    className="w-full mt-2 md:mt-4"
+                    className="w-full bg-teal-600 hover:bg-teal-700 mt-2 md:mt-4"
                     disabled={loading}
                   >
                     {loading ? "Logging in..." : "Login"}

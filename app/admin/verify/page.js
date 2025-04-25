@@ -10,7 +10,7 @@ export default function AdminVerification() {
         className="absolute inset-0 z-0 bg-cover bg-center"
         style={{
           backgroundImage:
-            "url('/schoolchildren-with-blackboard-background.jpg')",
+            "url('/school7.jpg')",
         }}
       />
       {/* Semi-transparent overlay */}

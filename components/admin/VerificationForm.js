@@ -52,14 +52,19 @@ export function VerificationForm() {
   };
 
   return (
-    <Card className="w-full max-w-md bg-white bg-opacity-90">
+    <Card className="w-full max-w-md bg-gray-600 bg-opacity-60 rounded-none border-2 border-white shadow-xl">
       <CardHeader>
-        <h1 className="text-2xl font-bold">Admin Access Verification</h1>
+        <h1 className="text-2xl text-white font-bold">
+          Admin Access Verification
+        </h1>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <label htmlFor="token" className="block text-sm font-medium">
+            <label
+              htmlFor="token"
+              className="block text-sm text-white font-medium"
+            >
               Enter Access Token
             </label>
             <Input
@@ -69,10 +74,15 @@ export function VerificationForm() {
               onChange={(e) => setToken(e.target.value)}
               placeholder="Enter your access token here"
               required
+              className="bg-gray-500 text-white placeholder:text-gray-300"
             />
           </div>
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button
+            type="submit"
+            className="w-full bg-teal-600 hover:bg-teal-700"
+            disabled={isLoading}
+          >
             {isLoading ? "Verifying..." : "Verify"}
           </Button>
         </form>

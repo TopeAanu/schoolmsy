@@ -117,8 +117,7 @@ export default function AdminSignup() {
     <div
       className="min-h-screen bg-cover bg-center relative text-black dark:text-dark"
       style={{
-        backgroundImage:
-          "url('/schoolchildren-with-blackboard-background.jpg')",
+        backgroundImage: "url('/school6.jpg')",
       }}
     >
       {/* Semi-transparent overlay for better readability */}
@@ -128,16 +127,18 @@ export default function AdminSignup() {
       <div className="relative z-10 min-h-screen flex flex-col">
         <Navbar />
         <div className="flex-grow flex items-center justify-center p-4">
-          <Card className="w-full max-w-md bg-white bg-opacity-90 shadow-xl">
+          <Card className="w-full max-w-md bg-gray-600 bg-opacity-60 shadow-xl rounded-none border-2 border-white">
             <CardHeader>
-              <h1 className="text-2xl font-bold">Admin Registration</h1>
+              <h1 className="text-2xl text-white font-bold">
+                Admin Registration
+              </h1>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div className="space-y-2">
                   <label
                     htmlFor="username"
-                    className="block text-sm font-medium"
+                    className="block text-sm text-white font-medium"
                   >
                     Username*
                   </label>
@@ -149,11 +150,15 @@ export default function AdminSignup() {
                     placeholder="Enter username"
                     value={formData.username}
                     onChange={handleChange}
+                    className="bg-gray-500 text-white placeholder:text-gray-300"
                   />
                 </div>
 
                 <div className="space-y-2">
-                  <label htmlFor="email" className="block text-sm font-medium">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm  text-white font-medium"
+                  >
                     Email*
                   </label>
                   <Input
@@ -164,13 +169,14 @@ export default function AdminSignup() {
                     placeholder="Enter email address"
                     value={formData.email}
                     onChange={handleChange}
+                    className="bg-gray-500 text-white placeholder:text-gray-300"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <label
                     htmlFor="fullName"
-                    className="block text-sm font-medium"
+                    className="block text-sm text-white font-medium"
                   >
                     Full Name
                   </label>
@@ -181,13 +187,14 @@ export default function AdminSignup() {
                     placeholder="Enter your full name"
                     value={formData.fullName}
                     onChange={handleChange}
+                    className="bg-gray-500 text-white placeholder:text-gray-300"
                   />
                 </div>
 
                 <div className="space-y-2">
                   <label
                     htmlFor="password"
-                    className="block text-sm font-medium"
+                    className="block text-sm text-white font-medium"
                   >
                     Password*
                   </label>
@@ -200,10 +207,11 @@ export default function AdminSignup() {
                       placeholder="Create a password"
                       value={formData.password}
                       onChange={handleChange}
+                      className="bg-gray-500 text-white placeholder:text-gray-300"
                     />
                     <button
                       type="button"
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-300 hover:text-white focus:outline-none"
                       onClick={togglePasswordVisibility}
                     >
                       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
@@ -214,7 +222,7 @@ export default function AdminSignup() {
                 <div className="space-y-2">
                   <label
                     htmlFor="confirmPassword"
-                    className="block text-sm font-medium"
+                    className="block text-sm text-white font-medium"
                   >
                     Confirm Password*
                   </label>
@@ -227,10 +235,11 @@ export default function AdminSignup() {
                       placeholder="Confirm your password"
                       value={formData.confirmPassword}
                       onChange={handleChange}
+                      className="bg-gray-500 text-white placeholder:text-gray-300"
                     />
                     <button
                       type="button"
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-300 hover:text-white focus:outline-none"
                       onClick={toggleConfirmPasswordVisibility}
                     >
                       {showConfirmPassword ? (
@@ -242,7 +251,11 @@ export default function AdminSignup() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="w-full bg-teal-600 hover:bg-teal-700"
+                  disabled={isLoading}
+                >
                   {isLoading ? "Creating Account..." : "Create Admin"}
                 </Button>
               </form>

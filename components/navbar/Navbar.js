@@ -40,7 +40,7 @@ const Navbar = () => {
               className={`px-3 py-2 transition-colors ${
                 pathname === "/"
                   ? "text-white font-medium bg-teal-600"
-                  : "text-white hover:text-teal-500 bg-gray-100/30"
+                  : "text-white hover:text-teal-500 bg-gray-900/30"
               }`}
             >
               Home
@@ -50,7 +50,7 @@ const Navbar = () => {
               className={`px-3 py-2 transition-colors ${
                 pathname === "/student/login"
                   ? "text-white font-medium bg-teal-600"
-                  : "text-white hover:text-teal-500 bg-gray-100/30"
+                  : "text-white hover:text-teal-500 bg-gray-900/30"
               }`}
             >
               Student Login
@@ -60,7 +60,7 @@ const Navbar = () => {
               className={`px-3 py-2 transition-colors ${
                 pathname === "/admin/signin"
                   ? "text-white font-medium bg-teal-600"
-                  : "text-white hover:text-teal-500 bg-gray-100/30"
+                  : "text-white hover:text-teal-500 bg-gray-900/30"
               }`}
             >
               Admin Login
@@ -70,7 +70,7 @@ const Navbar = () => {
               className={`px-3 py-2 transition-colors ${
                 pathname === "/admin/signup"
                   ? "text-white font-medium bg-teal-600"
-                  : "text-white hover:text-teal-500 bg-gray-100/30"
+                  : "text-white hover:text-teal-500 bg-gray-900/30"
               }`}
             >
               Admin Signup
@@ -126,7 +126,7 @@ const Navbar = () => {
             className={`block px-3 py-2 transition-colors ${
               pathname === "/"
                 ? "text-white font-medium bg-teal-600"
-                : "text-white hover:text-teal-500 bg-gray-100/30"
+                : "text-white hover:text-teal-500 bg-gray-900/30"
             }`}
           >
             Home
@@ -136,7 +136,7 @@ const Navbar = () => {
             className={`block px-3 py-2 transition-colors ${
               pathname === "/student/login"
                 ? "text-white font-medium bg-teal-600"
-                : "text-white hover:text-teal-500 bg-gray-100/30"
+                : "text-white hover:text-teal-500 bg-gray-900/30"
             }`}
           >
             Student Login
@@ -146,7 +146,7 @@ const Navbar = () => {
             className={`block px-3 py-2 transition-colors ${
               pathname === "/admin/signin"
                 ? "text-white font-medium bg-teal-600"
-                : "text-white hover:text-teal-500 bg-gray-100/30"
+                : "text-white hover:text-teal-500 bg-gray-900/30"
             }`}
           >
             Admin Login
@@ -156,7 +156,7 @@ const Navbar = () => {
             className={`block px-3 py-2 transition-colors ${
               pathname === "/admin/signup"
                 ? "text-white font-medium bg-teal-600"
-                : "text-white hover:text-teal-500 bg-gray-100/30"
+                : "text-white hover:text-teal-500 bg-gray-900/30"
             }`}
           >
             Admin Signup

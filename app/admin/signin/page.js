@@ -81,8 +81,7 @@ export default function SignIn() {
     <div
       className="min-h-screen bg-cover bg-center relative"
       style={{
-        backgroundImage:
-          "url('/schoolchildren-with-blackboard-background.jpg')",
+        backgroundImage: "url('/school5.jpg')",
       }}
     >
       {/* Semi-transparent overlay for better readability if needed */}
@@ -93,14 +92,14 @@ export default function SignIn() {
         <Navbar />
         <div className="flex-grow flex items-center justify-center p-4">
           <div className="max-w-md w-full">
-            <Card className="bg-white bg-opacity-90 shadow-xl">
+            <Card className="bg-gray-600 bg-opacity-60 shadow-xl rounded-none border-2 border-white">
               <CardHeader>
-                <h1 className="text-2xl font-bold">Admin Login</h1>
+                <h1 className="text-2xl text-white font-bold">Admin Login</h1>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="block mb-2">Username</label>
+                    <label className="block mb-2 text-white">Username</label>
                     <Input
                       required
                       placeholder="Enter your username"
@@ -111,11 +110,12 @@ export default function SignIn() {
                           username: e.target.value,
                         })
                       }
+                      className="bg-gray-500 text-white placeholder:text-gray-300"
                     />
                   </div>
 
                   <div>
-                    <label className="block mb-2">Password</label>
+                    <label className="block mb-2 text-white">Password</label>
                     <div className="relative">
                       <Input
                         type={showPassword ? "text" : "password"}
@@ -128,10 +128,11 @@ export default function SignIn() {
                             password: e.target.value,
                           })
                         }
+                        className="bg-gray-500 text-white placeholder:text-gray-300"
                       />
                       <button
                         type="button"
-                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-gray-700 focus:outline-none"
+                        className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-300 hover:text-white focus:outline-none"
                         onClick={togglePasswordVisibility}
                       >
                         {showPassword ? (
@@ -143,7 +144,10 @@ export default function SignIn() {
                     </div>
                   </div>
 
-                  <Button type="submit" className="w-full">
+                  <Button
+                    type="submit"
+                    className="w-full bg-teal-600 hover:bg-teal-700"
+                  >
                     Sign In
                   </Button>
                 </form>
