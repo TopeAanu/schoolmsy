@@ -76,7 +76,7 @@ const StudentLogin = () => {
         <Navbar />
         <div className="flex-grow flex items-center justify-center p-4 sm:p-6 md:p-8">
           <div className="max-w-md w-full">
-            <Card className="bg-gray-600 bg-opacity-60 shadow-xl rounded-none border-2 border-white">
+            <Card className="bg-gray-600 bg-opacity-60 shadow-xl border-2 border-white">
               <CardHeader className="pb-4 md:pb-4">
                 <h2 className="text-2xl text-white font-bold">Student Login</h2>
               </CardHeader>

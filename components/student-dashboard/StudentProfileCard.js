@@ -17,7 +17,7 @@ export const StudentProfileCard = ({ studentData }) => {
                 src={studentData.image}
                 alt={studentData.name}
                 className="w-32 h-32 border-gray-200 border object-cover mb-2"
-                style={{ borderRadius: "5px" }}
+                style={{ borderRadius: "2px" }}
               />
             ) : (
               <div
@@ -28,7 +28,7 @@ export const StudentProfileCard = ({ studentData }) => {
               </div>
             )}
 
-            {/* Name and basic info with reduced line height */}
+            {/* Name and basic info */}
             <div className="text-center">
               <h4 className="text-xl font-bold mb-1 leading-tight">
                 {studentData.name}
@@ -67,8 +67,8 @@ export const StudentProfileCard = ({ studentData }) => {
 
               <div className="flex justify-between">
                 <span className="text-gray-600">Average Grade:</span>
-                <span className="font-medium text-blue-600">
-                  {studentData.averageGrade || "N/A"}
+                <span className="font-medium text-teal-600">
+                  {studentData.averageGrade || "0"}
                 </span>
               </div>
             </div>

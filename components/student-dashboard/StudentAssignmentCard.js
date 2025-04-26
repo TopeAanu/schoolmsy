@@ -94,20 +94,20 @@ export const StudentAssignmentsCard = ({ username }) => {
           <div className="flex space-x-2">
             <button
               onClick={() => setActiveTab("assignments")}
-              className={`px-3 py-1 rounded ${
+              className={`px-3 py-1 rounded-sm ${
                 activeTab === "assignments"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-100"
+                  ? "bg-teal-500 text-white"
+                  : "bg-gray-200"
               }`}
             >
               Assignments
             </button>
             <button
               onClick={() => setActiveTab("grades")}
-              className={`px-3 py-1 rounded ${
+              className={`px-3 py-1 rounded-sm ${
                 activeTab === "grades"
-                  ? "bg-blue-500 text-white"
-                  : "bg-gray-100"
+                  ? "bg-teal-500 text-white"
+                  : "bg-gray-200"
               }`}
             >
               Grades

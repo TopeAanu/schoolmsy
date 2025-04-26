@@ -81,7 +81,7 @@ export default function AdminSignup() {
       }
 
       setSuccess(
-        "Admin account created successfully! Redirecting to sign in page..."
+        "Admin account created successfully!"
       );
 
       // Clear form
@@ -96,7 +96,7 @@ export default function AdminSignup() {
       // Redirect to signin page after a brief delay
       setTimeout(() => {
         router.push("/admin/signin");
-      }, 2000);
+      }, 4000);
     } catch (error) {
       setError(error.message);
     } finally {

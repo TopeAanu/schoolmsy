@@ -13,8 +13,8 @@ const StudentDashboard = () => {
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto p-4 text-center">
-        Loading student information...
+      <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-80 z-50">
+        <div className="w-12 h-12 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
       </div>
     );
   }
