@@ -4,7 +4,7 @@
 export function Card({ children, className = "" }) {
   return (
     <div
-      className={`bg-white rounded-sm shadow-lg overflow-hidden ${className}`}
+      className={`rounded-sm overflow-hidden bg-gray-600 bg-opacity-60 shadow-xl border-2 border-white ${className}`}
     >
       {children}
     </div>
