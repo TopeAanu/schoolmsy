@@ -1,11 +1,11 @@
 // components/student-dashboard/StudentProfileCard.jsx
 "use client";
 import React from "react";
-import { Card, CardHeader, CardContent } from "../ui/card";
+import { Card1, CardHeader, CardContent } from "../ui/card";
 
 export const StudentProfileCard = ({ studentData }) => {
   return (
-    <Card>
+    <Card1>
       <CardHeader>Student Profile</CardHeader>
       <CardContent>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -75,6 +75,6 @@ export const StudentProfileCard = ({ studentData }) => {
           </div>
         </div>
       </CardContent>
-    </Card>
+    </Card1>
   );
 };

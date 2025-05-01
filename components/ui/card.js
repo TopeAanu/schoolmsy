@@ -11,6 +11,17 @@ export function Card({ children, className = "" }) {
   );
 }
 
+// components/ui/card1.js
+export function Card1({ children, className = "" }) {
+  return (
+    <div
+      className={`rounded-sm overflow-hidden bg-white shadow-xl border-2 border-white ${className}`}
+    >
+      {children}
+    </div>
+  );
+}
+
 export function CardHeader({ children, className = "" }) {
   return (
     <div className={`px-6 py-4 border-b border-gray-200 ${className}`}>

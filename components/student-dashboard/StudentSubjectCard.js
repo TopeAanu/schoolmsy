@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Card1, CardHeader, CardContent } from "@/components/ui/card";
 
 export function StudentSubjectsCard({ subjects }) {
   return (
-    <Card className="w-full">
+    <Card1 className="w-full">
       <CardHeader>My Subjects</CardHeader>
       <CardContent>
         {subjects && subjects.length > 0 ? (
@@ -32,6 +32,6 @@ export function StudentSubjectsCard({ subjects }) {
           <p className="text-center text-gray-500">No subjects found</p>
         )}
       </CardContent>
-    </Card>
+    </Card1>
   );
 }

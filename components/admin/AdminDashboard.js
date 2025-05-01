@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
+import { Card1, CardHeader, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
@@ -360,7 +360,7 @@ const AdminDashboard = () => {
   // Rest of the component remains the same as in the previous artifact
   return (
     <div className="max-w-2xl mx-auto p-4 text-black dark:text-dark">
-      <Card>
+      <Card1>
         <CardHeader>
           <div className="flex flex-row justify-between items-center gap-2">
             {/* Left side - heading */}
@@ -460,7 +460,7 @@ const AdminDashboard = () => {
 
           {error && <MessageAlert type="error" message={error} />}
         </CardContent>
-      </Card>
+      </Card1>
     </div>
   );
 };

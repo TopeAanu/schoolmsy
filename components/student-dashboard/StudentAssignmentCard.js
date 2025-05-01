@@ -1,7 +1,7 @@
 // components/student-dashboard/StudentAssignmentCard.jsx
 "use client";
 import React, { useState, useEffect } from "react";
-import { Card, CardHeader, CardContent } from "../ui/card";
+import { Card1, CardHeader, CardContent } from "../ui/card";
 import { Badge } from "../ui/badge"; // You'll need to create this component
 
 export const StudentAssignmentsCard = ({ username }) => {
@@ -66,28 +66,28 @@ export const StudentAssignmentsCard = ({ username }) => {
 
   if (loading) {
     return (
-      <Card>
+      <Card1>
         <CardHeader>Assignments & Grades</CardHeader>
         <CardContent>
           <p>Loading academic information...</p>
         </CardContent>
-      </Card>
+      </Card1>
     );
   }
 
   if (error) {
     return (
-      <Card>
+      <Card1>
         <CardHeader>Assignments & Grades</CardHeader>
         <CardContent>
           <p className="text-red-600">Error: {error}</p>
         </CardContent>
-      </Card>
+      </Card1>
     );
   }
 
   return (
-    <Card className="col-span-1 md:col-span-3">
+    <Card1 className="col-span-1 md:col-span-3">
       <CardHeader>
         <div className="flex justify-between items-center">
           <span className="md:block hidden">Assignments & Grades</span>
@@ -185,6 +185,6 @@ export const StudentAssignmentsCard = ({ username }) => {
           </>
         )}
       </CardContent>
-    </Card>
+    </Card1>
   );
 };
